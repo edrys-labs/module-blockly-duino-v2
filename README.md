@@ -4,7 +4,7 @@ This is an integration of the Blockly-Duino2 web-editor into the Edrys system, t
 
 To use it in edrys import the following URL to your course:
 
-`https://cross-lab-project.github.io/edrys_module-blockly-duino-v2/index.html`
+`https://edrys-labs.github.io/module-blockly-duino-v2/index.html`
 
 ## Configuration
 

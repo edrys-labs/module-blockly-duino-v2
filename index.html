@@ -9,6 +9,26 @@
     <meta charset="utf-8">
     <meta name="google" value="notranslate">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta 
+      name="module-config" 
+      content="{
+        'config': {
+          'runCommand': {
+            'type': string,
+            'hint': 'Message to listen to (Default: execute)'
+          },
+          'board': {
+            'type': string,
+            'hint': 'Board name (e.g.: arduino_mega)'
+          },
+          'code': {
+            'type': text-area,
+            'hint': 'To initialize the editor (Check the module repo for examples)'
+          },
+        },
+      }" 
+    />
+
     <title>blocklyduino</title>
     <link rel="icon" type="image/png" href="blocklyduino/media/logo_only.png" />
     <link rel="stylesheet" href="css/font_awesome_all.min.css" />

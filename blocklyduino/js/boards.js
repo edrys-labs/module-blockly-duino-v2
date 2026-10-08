@@ -28,6 +28,7 @@ Code.setBoard = function (boardId) {
     }
     document.getElementById('boardMenu').value = boardId;
     profile.default = profile[boardId][0];
+    document.getElementById('boardLabel').textContent = boardId === 'none' ? '' : '· ' + profile.default.description;
 };
 
 /**
@@ -49,70 +50,23 @@ Code.setBoard = function (boardId) {
  * @param {string} boardId 
  */
 Code.changeBoard = function (boardId) {
-	var newBoard = boardId;
-
-	if (boardId == undefined) {
-		
-		var boardMenu = document.getElementById('boardDescriptionSelector');
-
-
-		newBoard = encodeURIComponent(boardMenu.options[boardMenu.selectedIndex].value);
-		var search = window.location.search;
-		if (search.length <= 1) {
-			search = '?board=' + newBoard;
-		} else if (search.match(/[?&]board=[^&]*/)) {
-			search = search.replace(/([?&]board=)[^&]*/, '$1' + newBoard);
-		} else {
-			search = search.replace(/\?/, '?board=' + newBoard + '&');
-		}
-		profile["default"] = profile[newBoard][0];
-		document.getElementById("boardDescriptionSelector").selectedIndex = newBoard;
-		document.getElementById("boardDescriptionSelector").value = newBoard;
-		document.getElementById("boardSelected_span").textContent = profile["default"].description;
-		document.getElementById("portSelected_span").textContent = ' : ' + document.getElementById('serialMenu').options[document.getElementById('serialMenu').selectedIndex].value;
-		window.history.pushState({}, "blocklyduino", window.location.host + window.location.pathname + search);
-		// "reboot" elements
-		document.getElementById('overlayForModals').style.display = "none";
-		document.getElementById('boardListModal').classList.remove('show');
+	// without an argument: the board picked in the boards modal
+	var fromModal = boardId == undefined;
+	if (fromModal) {
+		boardId = document.getElementById('boardDescriptionSelector').value;
+		Code.boardsListModalHide();
 	}
-	
+
 	Code.setBoard(boardId);
 	Code.buildToolbox();
+	// Reload the blocks so their pin dropdowns use the new board.
 	var xml = Blockly.Xml.workspaceToDom(Code.workspace);
+	Code.workspace.clear();
 	Blockly.Xml.domToWorkspace(xml, Code.workspace);
-}
-;
 
-/**
- * Set COM port
- */
-Code.setPort = function ()  {
-    var serialPortMenu = document.getElementById('serialMenu');
-    var newPort = encodeURIComponent(serialPortMenu.options[serialPortMenu.selectedIndex].value);
-	document.getElementById('overlayForModals').style.display = "none";
-	document.getElementById('portListModal').classList.remove('show');
-	document.getElementById("portSelected_span").textContent = ' : ' + newPort;
-	/*
-	if (newPort != 'none') {
-		document.getElementById('serialButton').classList.add('active');
-		document.getElementById('serialButton').title = newPort;
-		document.getElementById('serialButton').onmouseover = function () {
-			document.getElementById("content_hoverButton").textContent = newPort;
-		};
-		document.getElementById('serialButton').onmouseout = function () {
-			document.getElementById("content_hoverButton").textContent = "";
-		}
+	// Edrys: share a board picked by the user with the room.
+	if (fromModal && window.edrysBoardCallback) {
+		window.edrysBoardCallback(boardId);
 	}
-		else {
-			document.getElementById('serialButton').classList.remove('active');
-			document.getElementById('serialButton').title = MSG['serialButtonSpan'];
-			document.getElementById('serialButton').onmouseover = function () {
-				document.getElementById("content_hoverButton").textContent = MSG['serialButtonSpan'];
-			};
-			document.getElementById('serialButton').onmouseout = function () {
-				document.getElementById("content_hoverButton").textContent = "";
-			};
-		}
-	*/
 }
 ;

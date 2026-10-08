@@ -93,30 +93,6 @@ var $ = function(el, tag) {
 // Retourne tous les éléments P
 // $('p');
 
-/*
- * Javascript function for collapsible content in modal
- */
-function collapsibleContentInit() {
-    var coll = document.getElementsByClassName("collapsibleButton");
-    for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            var content = this.nextElementSibling;
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
-                document.getElementById("board_mini_picture_div").style.transform = "scale(1)";
-                document.getElementById("board_mini_picture_div").style.top = "";
-                document.getElementById("collapsibleContent").style.visibility = "hidden";
-            } else {
-                content.style.maxHeight = content.scrollHeight + "px";
-                document.getElementById("board_mini_picture_div").style.transform = "scale(1.7)";
-                document.getElementById("board_mini_picture_div").style.top = "150px";
-                document.getElementById("collapsibleContent").style.visibility = "visible";
-            }
-        });
-    }
-}
-
 function toggleEditorReadOnly(item) {
     if (item.checked) {
         editor.setOptions({

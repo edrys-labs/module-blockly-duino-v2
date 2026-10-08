@@ -114,53 +114,24 @@ Code.boardsListModalShow = function () {
         document.getElementById("boardDescriptionSelector").value = boardValue;
         document.getElementById("boardDescriptionSelector").options[document.getElementById("boardDescriptionSelector").selectedIndex].style.backgroundColor = 'yellow';
     }
-    window.addEventListener('click', Code.boardsListModalHide, 'once');
     Code.boardDescription();
 };
-Code.portsListModalShow = function () {
-    document.getElementById('overlayForModals').style.display = "block";
-    document.getElementById('portListModal').classList.add('show');
-    var portValue = document.getElementById("serialMenu").value;
-    if (portValue !== 'none') {
-        document.getElementById("serialMenu").selectedIndex = portValue;
-        document.getElementById("serialMenu").value = portValue;
-    }
-    window.addEventListener('click', Code.portsListModalHide, 'once');
-};
-document.getElementById("closeModalBoards").onclick = function () {
+Code.boardsListModalHide = function () {
     document.getElementById('overlayForModals').style.display = "none";
     document.getElementById('boardListModal').classList.remove('show');
 };
-document.getElementById("closeModalPorts").onclick = function () {
-    document.getElementById('overlayForModals').style.display = "none";
-    document.getElementById('portListModal').classList.remove('show');
-};
-// When the user clicks anywhere outside of the modal, close it
-Code.boardsListModalHide = function (event) {
-    if (!document.getElementById('boardListModal').contains(event.target)) {
-        document.getElementById('overlayForModals').style.display = "none";
-        document.getElementById('boardListModal').classList.remove('show');
-    }
-};
-Code.portsListModalHide = function (event) {
-    if (!document.getElementById('portListModal').contains(event.target)) {
-        document.getElementById('overlayForModals').style.display = "none";
-        document.getElementById('portListModal').classList.remove('show');
-    }
-};
+document.getElementById("closeModalBoards").onclick = Code.boardsListModalHide;
+// The overlay covers everything but the modal: a click on it closes the modal.
+document.getElementById("overlayForModals").onclick = Code.boardsListModalHide;
 
 /**
- * change information in the boards modal
+ * change the picture in the boards modal
  **/
 Code.boardDescription = function () {
     var boardValue = document.getElementById("boardDescriptionSelector").value;
     if (boardValue === '')
         boardValue = 'none';
     document.getElementById("board_mini_picture").setAttribute("src", profile[boardValue][0]['picture']);
-    document.getElementById("board_connect").textContent = profile[boardValue][0]['usb'];
-    document.getElementById("board_cpu").textContent = profile[boardValue][0]['cpu'];
-    document.getElementById("board_voltage").textContent = profile[boardValue][0]['voltage'];
-    document.getElementById("board_inout").textContent = profile[boardValue][0]['inout'];
 };
 
 /**

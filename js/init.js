@@ -54,7 +54,6 @@ Code.init = function () {
     Code.setBoard();
     Code.initLanguage();
     setOnOffLine();
-    collapsibleContentInit();
     var rtl = Code.isRtl();
     //define resizable workspace
     var container = document.getElementById('content_area');
@@ -401,23 +400,6 @@ Code.initLanguage = function () {
     document.getElementById('iot_title_span').textContent = MSG['iot_title_span'];
     //board list modal
     document.getElementById('boardListModalHeader_span').textContent = MSG['boardListModalHeader_span'];
-    document.getElementById('boardListModalButton_span').textContent = MSG['boardListModalButton_span'];
-    document.getElementById('boardModal_connect').textContent = MSG['boardModal_connect'];
-    document.getElementById('boardModal_voltage').textContent = MSG['boardModal_voltage'];
-    document.getElementById('boardModal_voltage_normal').textContent = MSG['boardModal_voltage_normal'];
-    document.getElementById('boardModal_voltage_maxi').textContent = MSG['boardModal_voltage_maxi'];
-    document.getElementById('boardModal_cpu').textContent = MSG['boardModal_cpu'];
-    document.getElementById('boardModal_speed').textContent = MSG['boardModal_speed'];
-    document.getElementById('boardModal_inout').textContent = MSG['boardModal_inout'];
-    document.getElementById('boardModal_in_analog').textContent = MSG['boardModal_in_analog'];
-    document.getElementById('boardModal_out_analog').textContent = MSG['boardModal_out_analog'];
-    document.getElementById('boardModal_i_max_out').textContent = MSG['boardModal_i_max_out'];
-    document.getElementById('boardModal_i_max3').textContent = MSG['boardModal_i_max3'];
-    document.getElementById('boardModal_i_max_5').textContent = MSG['boardModal_i_max_5'];
-    document.getElementById('boardModal_flash').textContent = MSG['boardModal_flash'];
-    document.getElementById('boardModal_sram').textContent = MSG['boardModal_sram'];
-    document.getElementById('boardModal_eeprom').textContent = MSG['boardModal_eeprom'];
-    document.getElementById('portListModalHeader_span').textContent = MSG['portListModalHeader_span'];
     //keyboard nav
     Blockly.navigation.ACTION_PREVIOUS.name = MSG['actionName0'];
     Blockly.navigation.ACTION_OUT.name = MSG['actionName1'];

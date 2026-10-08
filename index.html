@@ -54,6 +54,10 @@
         #edrysErrors[hidden] {
             display: none;
         }
+        #boardLabel {
+            margin-left: 0.5rem;
+            font-weight: normal;
+        }
     </style>
 </head>
 
@@ -72,6 +76,8 @@
 
 
                     <span class="TitleText" style="float: left" id="appName"></span>
+                    <!-- the room's board, set in Code.setBoard -->
+                    <span class="TitleText" style="float: left" id="boardLabel" title="Board"></span>
 
                     <!-- <span class="sketch_name_wrapper"> -->
                     <!-- <i class="mdi-image-edit sketch_name_icon active"></i> -->
@@ -233,31 +239,13 @@
                         </div>
                     </div>
 
-                    <button id="boardButton" class="iconButtons" onclick="Code.boardsListModalShow()">
-                            <span id="boardButton_span">
-                                <i class="fas fa-microchip"></i>
-                            </span>
-                        </button>
-                        <button id="verifyButton" class="iconButtons">
-                            <span id="verifyButton_span">
-                                <i class="fas fa-check"></i>
-                            </span>
-                        </button>
-                        <button id="serialButton" class="iconButtons" onclick="Code.portsListModalShow()">
-                            <span id="serialButton_span">
-                                <i class="fab fa-usb"></i>
-                            </span>
-                        </button>
-                        <button id="uploadButton" class="iconButtons">
-                            <span id="uploadButton_span">
-                                <i class="fas fa-sign-out-alt"></i>
-                            </span>
-                        </button>
-                        <button id="serialConnectButton" class="iconButtons">
-                            <span id="serialConnectButton_span">
-                                <i class="fas fa-search"></i>
-                            </span>
-                        </button>
+                    <!-- shown to teachers and stations in Edrys.onReady -->
+                    <button id="boardButton" class="iconButtons" style="display: none" title="Board" aria-label="Board"
+                        onclick="Code.boardsListModalShow()">
+                        <span id="boardButton_span">
+                            <i class="fas fa-microchip"></i>
+                        </span>
+                    </button>
 
                     <div style="float:right">
                         <button id="copyCodeButton" class="iconButtons" onclick="Code.copyToClipboard()">
@@ -558,56 +546,6 @@
                 </div>
             </div>
             <button id="boardListModalDialogOkay" onclick="Code.changeBoard()">&#10004;</button>
-            <button type="button" class="collapsibleButton">
-                <span id="boardListModalButton_span">Details</span>
-            </button>
-            <div class="collapsibleContent" id="collapsibleContent">
-                <span id="boardModal_connect"></span><span id="boardModal_connect_span"
-                    class="modalBoard_info">...</span><br>
-                <span id="boardModal_voltage"></span><span id="boardModal_voltage_span"
-                    class="modalBoard_info">...</span><br>
-                <span id="boardModal_voltage_normal"></span><span id="boardModal_voltage_normal_span"
-                    class="modalBoard_info">...</span><br>
-                <span id="boardModal_voltage_maxi"></span><span id="boardModal_voltage_maxi_span"
-                    class="modalBoard_info">...</span><br>
-                <span id="boardModal_cpu"></span><span id="boardModal_cpu_span" class="modalBoard_info">...</span><br>
-                <span id="boardModal_speed"></span><span id="boardModal_speed_span"
-                    class="modalBoard_info">...</span><br>
-                <span id="boardModal_inout"></span><span id="boardModal_inout_span"
-                    class="modalBoard_info">...</span><br>
-                <span id="boardModal_in_analog"></span><span id="boardModal_in_analog_span"
-                    class="modalBoard_info">...</span><br>
-                <span id="boardModal_out_analog"></span><span id="boardModal_out_analog_span"
-                    class="modalBoard_info">...</span><br>
-                <span id="boardModal_i_max_out"></span><span id="boardModal_i_max_out_span"
-                    class="modalBoard_info">...</span><br>
-                <span id="boardModal_i_max3"></span><span id="boardModal_i_max3_span"
-                    class="modalBoard_info">...</span><br>
-                <span id="boardModal_i_max_5"></span><span id="boardModal_i_max_5_span"
-                    class="modalBoard_info">...</span><br>
-                <span id="boardModal_flash"></span><span id="boardModal_flash_span"
-                    class="modalBoard_info">...</span><br>
-                <span id="boardModal_sram"></span><span id="boardModal_sram_span" class="modalBoard_info">...</span><br>
-                <span id="boardModal_eeprom"></span><span id="boardModal_eeprom_span"
-                    class="modalBoard_info">...</span><br>
-            </div>
-        </div>
-    </div>
-    <div id="portListModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <i class="fab fa-usb"></i>
-                <span id="portListModalHeader_span"></span>
-                <span class="closeModal" id="closeModalPorts">&times;</span>
-            </div>
-            <div class="modal-body" id="portListModalBody">
-            </div>
-            <div class="modal-footer">
-                <select id="serialMenu">
-                    <option value="none">...</option>
-                </select>
-                <button id="portListModalDialogOkay" onclick="Code.setPort()">&#10004;</button>
-            </div>
         </div>
     </div>
 </body>
@@ -728,9 +666,12 @@
         }
     }
 
-    // Room state keys: the shared workspace, and the config.code it was started from.
+    // Room state keys: the shared workspace and board, and the config values
+    // (config.code, config.board) they were started from.
     const STATE_XML = "blocklyXml"
     const STATE_SEED = "blocklySeed"
+    const STATE_BOARD = "blocklyBoard"
+    const STATE_BOARD_SEED = "blocklyBoardSeed"
 
     // Last workspace XML applied from or written to the room state. Loading a
     // workspace fires Blockly change events; comparing against this keeps a
@@ -774,6 +715,15 @@
         box.hidden = false
     }
 
+    function applyBoard(id) {
+        if (!id || id === document.getElementById("boardMenu").value) return
+        if (!profile[id]) {
+            showError('Unknown board "' + id + '" in the room; the board was not changed.')
+            return
+        }
+        Code.changeBoard(id)
+    }
+
     // Loads xml, reporting what went wrong instead of throwing.
     function tryApply(xml, what) {
         try {
@@ -792,12 +742,25 @@
         }
         const { code: startCode, board } = (typeof config === "object" && config) || {}
 
+        // Teachers and stations may change the board for the room. This only
+        // hides the button; it is not a permission check.
+        if (Edrys.role !== "student") {
+            document.getElementById("boardButton").style.display = ""
+        }
+
+        // The room's board: config.board is where it starts, like config.code.
         if (board && !profile[board]) {
             showError('Unknown board "' + board + '" in the module settings. Known boards: ' +
                 Object.keys(profile).filter((id) => id !== "none" && id !== "default").join(", ") + ".")
-        } else if (board) {
-            Code.changeBoard(board)
+        } else if (board && (!Edrys.getState(STATE_BOARD, "Value") || Edrys.getState(STATE_BOARD_SEED, "Value") !== board)) {
+            Edrys.updateState(() => {
+                Edrys.getState(STATE_BOARD_SEED, "Value", board)
+                Edrys.getState(STATE_BOARD, "Value", board)
+            })
         }
+        applyBoard(Edrys.getState(STATE_BOARD, "Value"))
+
+        window.edrysBoardCallback = (id) => Edrys.getState(STATE_BOARD, "Value", id)
 
         const room = Edrys.getState()
         const current = Edrys.getState(STATE_XML, "Value")
@@ -824,7 +787,10 @@
         }
 
         room.observe((event) => {
-            if (event.transaction.local || !event.keysChanged.has(STATE_XML)) return
+            if (event.transaction.local) return
+            // the board first: loading blocks depends on its pin lists
+            if (event.keysChanged.has(STATE_BOARD)) applyBoard(room.get(STATE_BOARD))
+            if (!event.keysChanged.has(STATE_XML)) return
             const xml = room.get(STATE_XML)
             if (xml && xml !== synced) tryApply(xml, "A change from another participant")
         })

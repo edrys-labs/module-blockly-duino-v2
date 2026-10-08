@@ -709,42 +709,33 @@
         }
     }
 
-    Edrys.onMessage(({
-        from,
-        subject,
-        body
-    }) => {
-        if (from == Edrys.username) {
-            //window.edrysCallbackBlock = true
-            return
-        }
+    // Room state keys: the shared workspace, and the config.code it was started from.
+    const STATE_XML = "blocklyXml"
+    const STATE_SEED = "blocklySeed"
 
-        switch (subject) {
-            case "xml": {
-                var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
-                var text = Blockly.Xml.domToText(xml);
+    // Last workspace XML applied from or written to the room state. Loading a
+    // workspace fires Blockly change events; comparing against this keeps a
+    // peer from writing back what it just received.
+    let synced = ""
 
-                if (text != body) {
-                    window.edrysCallbackBlock = 7
-                    Code.loadBlocksfromXml(body, false)
-                }
-                break
-            }
-            default: {
-                console.warn("Unknown message type:", subject, body)
-            }
-        }
-    })
+    function workspaceXml() {
+        return Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace()))
+    }
+
+    function apply(xml) {
+        synced = xml
+        Code.loadBlocksfromXml(xml, false)
+    }
 
     function callback(delay=2000) {
         let timerID = null
 
         function publish() {
-            const xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
-            const text = Blockly.Xml.domToText(xml);
-            Edrys.sendMessage("xml", text)
-
             timerID = null
+            const text = workspaceXml()
+            if (text === synced) return
+            synced = text
+            Edrys.getState(STATE_XML, "Value", text)
         }
 
         return () => {
@@ -754,25 +745,36 @@
 
             timerID = window.setTimeout(publish, delay)
         }
-
-
     }
 
     Edrys.onReady(() => {
-        
         const startCode = Edrys.module.config.code
-        const board = Edrys.module.config.board       
-
-        
+        const board = Edrys.module.config.board
 
         if (board) {
             Code.changeBoard(board)
         }
 
-        if (startCode) {
-            console.warn("Loading code from Edrys", startCode)
-            Code.loadBlocksfromXml(startCode, false)
+        const room = Edrys.getState()
+        const current = Edrys.getState(STATE_XML, "Value")
+
+        // Start from config.code only if the room has no program yet, or the
+        // teacher changed config.code since the program was started.
+        if (startCode && (!current || Edrys.getState(STATE_SEED, "Value") !== startCode)) {
+            Edrys.updateState(() => {
+                Edrys.getState(STATE_SEED, "Value", startCode)
+                Edrys.getState(STATE_XML, "Value", startCode)
+            })
+            apply(startCode)
+        } else if (current) {
+            apply(current)
         }
+
+        room.observe((event) => {
+            if (event.transaction.local || !event.keysChanged.has(STATE_XML)) return
+            const xml = room.get(STATE_XML)
+            if (xml && xml !== synced) apply(xml)
+        })
 
         window.edrysCallback = callback()
     });

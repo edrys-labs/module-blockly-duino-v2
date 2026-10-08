@@ -94,7 +94,8 @@ Code.copyToClipboard = function () {
         // window.getSelection().addRange(range);
     // }
     // document.execCommand("copy");
-        navigator.clipboard.writeText(document.getElementsByClassName("ace_content")[0].innerText)
+        // the whole program: .ace_content only holds the lines on screen
+        navigator.clipboard.writeText(editor.getValue())
                 .then(() => {console.log('Code copied!') })
                 .catch((error) => { console.log('Copy failed! ${error}') });
     }

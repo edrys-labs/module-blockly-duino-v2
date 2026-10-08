@@ -101,7 +101,6 @@
     cursor: help;
 }
 #copyCodeButton{
-    visibility: hidden;
     position: relative;
     right: 5px;
     border-radius: 5px;

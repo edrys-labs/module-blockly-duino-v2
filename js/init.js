@@ -127,6 +127,8 @@ Code.init = function () {
         Blockly.svgResize(Code.workspace);
 
         document.getElementById("content_code").style.width = (document.body.offsetWidth - 20 - width) + "px"
+        // Ace only measures its container on window resize; the pane width also changes here.
+        editor.resize()
 
 //        if (Code.workspace.RTL) {
 //          blocklyDiv.style.left = metrics.absoluteLeft + 'px';

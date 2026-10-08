@@ -58,8 +58,8 @@ Code.changeBoard = function (boardId) {
 	}
 
 	Code.setBoard(boardId);
-	Code.buildToolbox();
-	// Reload the blocks so their pin dropdowns use the new board.
+	// Reload the blocks so their pin dropdowns use the new board. The toolbox
+	// needs no rebuild: its blocks are created, with the current pins, when it opens.
 	var xml = Blockly.Xml.workspaceToDom(Code.workspace);
 	Code.workspace.clear();
 	Blockly.Xml.domToWorkspace(xml, Code.workspace);

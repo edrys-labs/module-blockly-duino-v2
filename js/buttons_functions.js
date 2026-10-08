@@ -308,26 +308,20 @@ Code.addReplaceParamToUrl = function (url, param, value) {
 };
 
 /**
- * Reset workspace and parameters
+ * Reset the program to where the lesson started. In Edrys this is the start
+ * program and board from the module settings, for everyone in the room
+ * (window.edrysReset). It used to clear localStorage, which all modules served
+ * from the same origin share, and reload, which brought the room's program back.
  */
 Code.ResetWorkspace = function () {
-    var count = Blockly.mainWorkspace.getAllBlocks(false).length;
+    var count = Code.workspace.getAllBlocks(false).length;
     Blockly.confirm(MSG['resetQuestion_span'] + ' ' + Blockly.Msg['DELETE_ALL_BLOCKS'].replace('%1', count), function (answer) {
-        if (answer) {
-            Blockly.Events.disable();
-            Blockly.getMainWorkspace().clear();
-            Blockly.getMainWorkspace().trashcan.contents_ = [];
-            Blockly.getMainWorkspace().trashcan.setLidOpen('false');
-            window.removeEventListener('unload', auto_save_and_restore_blocks, false);
-            localStorage.clear();
-            sessionStorage.clear();
-            Code.renderContent();
-            Blockly.Events.enable();
-            if (window.location.hash) {
-                window.location.hash = '';
-            }
-            window.location = window.location.protocol + '//' + window.location.host + window.location.pathname;
-        }
+        if (!answer)
+            return;
+        if (window.edrysReset)
+            window.edrysReset();
+        else
+            Code.workspace.clear();
     });
 };
 
@@ -335,21 +329,12 @@ Code.ResetWorkspace = function () {
  * Change font size in blocks in all workspace
  */
 Code.changeRenderingConstant = function (value) {
-    var type = document.getElementById('rendering-constant-selector').value;
-    switch (type) {
-        case 'fontSizeBlocks':
-            var fontStyle = {
-                'size': value
-            };
-            Blockly.getMainWorkspace().getTheme().setFontStyle(fontStyle);
-            editor.setOptions({
-                fontSize: value + "pt"
-            });
-        case 'fontSizePage':
-        // fontSizePageModify('access', value);
-        case 'fontSpacingPage':
-        // document.body.style.fontSize = value + 'px';
-    }
+    Blockly.getMainWorkspace().getTheme().setFontStyle({
+        'size': value
+    });
+    editor.setOptions({
+        fontSize: value + "pt"
+    });
     // Refresh theme.
     Blockly.getMainWorkspace().setTheme(Blockly.getMainWorkspace().getTheme());
 };

@@ -59,6 +59,28 @@
             margin-left: 0.5rem;
             font-weight: normal;
         }
+        /* Setup opens from the menu; its tab would sit over the run button. */
+        #lateral-panel-setup-label {
+            display: none;
+        }
+        #lateral-panel-setup,
+        #lateral-panel-setup-bloc {
+            max-width: 100vw;
+        }
+        #setup_header {
+            padding: 0.5rem 0.75rem;
+            background-color: #006468;
+            color: #fff;
+            font-size: x-large;
+            font-weight: bold;
+        }
+        #setup_content label.UIText {
+            margin-right: 0.25rem;
+        }
+        /* menu entries open on their text as well as their icon */
+        .menu_text {
+            cursor: pointer;
+        }
         /* The layout table: keep it at the module's width. Its cells would
            otherwise grow with the block area, which init.js sizes to them. */
         #globalTable {
@@ -152,7 +174,7 @@
                                         <i class="fas fa-cog"></i>
                                     </span>
                                 </button>
-                                <span id="parametersButton_span_menu" class="menu_text"></span>
+                                <span id="parametersButton_span_menu" class="menu_text" onclick="document.getElementById('lateral-panel-setup-input').click();"></span>
                                 <br>
                                 <hr>
                                 <button id="resetButton" class="iconButtons" onclick="Code.ResetWorkspace()">
@@ -160,7 +182,7 @@
                                         <i class="fas fa-power-off"></i>
                                     </span>
                                 </button>
-                                <span id="resetButton_span_menu" class="menu_text"></span>
+                                <span id="resetButton_span_menu" class="menu_text" onclick="Code.ResetWorkspace()"></span>
                                 <br>
                                 <hr>
                                 <button id="helpButton" class="iconButtons" onclick="toggleDisplayHelpModal()">
@@ -168,7 +190,7 @@
                                         <i class="fas fa-question"></i>
                                     </span>
                                 </button>
-                                <span id="helpButton_span_menu" class="menu_text"></span>
+                                <span id="helpButton_span_menu" class="menu_text" onclick="toggleDisplayHelpModal()"></span>
                             </div>
                         </div>
                     </div>
@@ -338,7 +360,8 @@
         </div>
         <form id="keyboard_mappings"></form>
     </div>
-    <div id="lateral-panel-setup" style="display: none;">
+    <!-- Setup: per-user settings (js/settings.js), opened from the menu -->
+    <div id="lateral-panel-setup">
         <input id="lateral-panel-setup-input" type="checkbox">
         <label id="lateral-panel-setup-label" for="lateral-panel-setup-input" class="label_panel">
             <span id="setup_side_span">
@@ -346,11 +369,13 @@
             </span>
         </label>
         <div id="lateral-panel-setup-bloc">
-            <button class="accordion">
-                <span id="config_UI_title_span" aria-expanded="false" aria-controls="accordion_setup_content"></span>
-            </button></button>
-            <div id="setup_content" class="side_content config_content panel">
-                <form id="options">
+            <div id="setup_header">
+                <span id="config_UI_title_span"></span>
+                <label for="lateral-panel-setup-input" class="closeModal" role="button" title="Close"
+                    aria-label="Close">&times;</label>
+            </div>
+            <div id="setup_content" class="side_content config_content">
+                <form id="options" onsubmit="return false">
                     <select id="boardMenu" style='display:none'>
                         <option value="none" selected="selected">...</option>
                         <option value="arduino_leonardo">Arduino Leonardo</option>
@@ -364,24 +389,12 @@
                         <option value="arduino_yun">Arduino Yùn</option>
                         <option value="lilypad">LilyPad</option>
                     </select>
-                    <br>
-                    <span id="languageSpan" class="UIText">...</span>
+                    <label for="languageMenu" id="languageSpan" class="UIText">...</label>
                     <select id="languageMenu"></select>
                     <br>
                     <br>
-                    <span id="interfaceColorSpan" class="UIText">...</span>
-                    <select id="interfaceColorMenu">
-                        <option value="arduino" selected="selected">blocklyduino2</option>
-                    </select>
-                    <br>
-                    <span id="codeEditorColorSpan" class="UIText">...</span>
-                    <select id="codeEditorColorMenu">
-                        <option value="arduino" selected="selected">blocklyduino2</option>
-                    </select>
-                    <br>
-                    <br>
-                    <span id="themeSpan" class="UIText">...</span>
-                    <select name="theme" onchange="changeTheme(this.value)">
+                    <label for="themeMenu" id="themeSpan" class="UIText">...</label>
+                    <select name="theme" id="themeMenu" onchange="changeTheme(this.value); Code.saveSetting('theme', this.value)">
                         <option value="classic" id="themeClassicSpan">classic</option>
                         <option value="modern" id="themeModernSpan">modern</option>
                         <option value="deuteranopia" id="themeDeuteranopiaSpan">deuteranopia</option>
@@ -392,8 +405,8 @@
                         <option value="blackWhite" id="themeBwSpan">blackWhite</option>
                     </select>
                     <br>
-                    <span id="renderSpan" class="UIText">...</span>
-                    <select name="renderer" onchange="document.forms.options.submit('options')">
+                    <label for="rendererMenu" id="renderSpan" class="UIText">...</label>
+                    <select id="rendererMenu" name="renderer" onchange="Code.changeRenderer(this.value)">
                         <option value="geras">Geras</option>
                         <option value="thrasos">Thrasos</option>
                         <option value="zelos">Zelos</option>
@@ -401,41 +414,18 @@
                     </select>
                 </form>
                 <br>
-                <span id="displaySpan" class="UIText">...</span>
-                <select name="displayChoice" onchange="">
-                    <option value="button" id="displayChoiceButtons">buttons</option>
-                    <option value="buttonText" id="displayChoiceBandT">buttons + text</option>
-                    <option value="text" id="displayChoiceText">text</option>
-                </select>
+                <label for="fontSizeRange" id="fontSizeSpan" class="UIText"></label>
                 <br>
-                <br>
-                <span id="fontSpan" class="UIText">...</span>
-                <select name="fontChoice" onchange="document.forms.options.submit('options')">
-                    <option value="arial">Arial</option>
-                    <option value="comics">Comic Sans MS</option>
-                    <option value="luciole">Luciole</option>
-                    <option value="opendyslexic">Open Dyslexic</option>
-                    <option value="trebuchet">Trebuchet MS</option>
-                    <option value="verdana">Verdana</option>
-                </select>
-                <br>
-                <span id="fontSizeSpan" class="UIText"></span>
-                <select id="rendering-constant-selector">
-                    <option value="fontSizeBlocks" id="optionFontSizeBlocks" selected="selected">Blocks & Editor Font
-                        Size</option>
-                    <option value="fontSizePage" id="optionFontSizePage">Page Font Size</option>
-                    <option value="fontSpacingPage" id="optionFontSpacingPage">Page Font Spacing</option>
-                </select>
-                <br>
-                <input type="range" min="3" max="50" value="4" oninput="Code.changeRenderingConstant(this.value)"
-                    onchange="Code.changeRenderingConstant(this.value)" />
+                <input id="fontSizeRange" type="range" min="8" max="30" value="11"
+                    oninput="Code.changeRenderingConstant(this.value)"
+                    onchange="Code.changeRenderingConstant(this.value); Code.saveSetting('fontSize', this.value)" />
                 <br>
                 <br>
                 <input id="accessibilityModeCheck" type="checkbox" onclick="toggleAccessibilityMode(this.checked)">
-                <span id="accessibilitySpan" class="UIText"></span>
+                <label for="accessibilityModeCheck" id="accessibilitySpan" class="UIText"></label>
                 <br>
                 <input id="displayKeyMappings" type="checkbox" onclick="toggleDisplayKeyMappings(this.checked)">
-                <span id="keyMappingSpan" class="UIText"></span>
+                <label for="displayKeyMappings" id="keyMappingSpan" class="UIText"></label>
                 <br>
                 <select id="cursorChanger" name="cursor" onchange="changeCursor(this.value)">
                     <option value="default" id="defaultCursorSpan">default</option>
@@ -443,113 +433,6 @@
                     <option value="line" id="lineCursorSpan">line</option>
                 </select>
                 <br>
-            </div>
-            <button class="accordion">
-                <span id="CLI_title_span" aria-expanded="false" aria-controls="accordion_CLI_content"></span>
-            </button>
-            <div id="CLI_content" class="side_content config_content CLI panel">
-                <div id="configCLI">
-                    <div id="CLI_title">
-                        <button id="coreUpdateButton" class="iconButtons CLI" onclick="">
-                            <span id="coreUpdateButton_span">
-                                <i class="fas fa-sync"></i>
-                            </span>
-                        </button>
-                        <button id="cleanCLIcacheButton" class="iconButtons CLI" onclick="">
-                            <span id="cleanCLIcache_span">
-                                <i class="fas fa-eraser"></i>
-                            </span>
-                        </button>
-                        <button id="listBoardsButton" class="iconButtons CLI" onclick="">
-                            <span id="listBoardsButton_span">
-                                <i class="fas fa-list"></i>
-                            </span>
-                        </button>
-                        <a href="https://arduino.github.io/arduino-cli/" id="CLI_githubLinkButton" target="_blank">
-                            <img src="./blocklyduino/media/featured-CLI.png" style="height: 40px" />
-                        </a>
-                    </div>
-                    <br>
-                    <span id="installBoard_title_span" class="UIText CLI">install board</span>
-                    <br>
-                    <input type="text" class="controlPanelInput" id="installBoardsInput" name="installBoardsInput">
-                    <button id="installBoardsButton" class="iconButtons CLI" onclick="">
-                        <span id="installBoardsButton_span">
-                            <i class="fas fa-cloud-download-alt"></i>
-                        </span>
-                    </button>
-                    <br>
-                    <br>
-                    <span id="searchlLib_title_span" class="UIText">search library</span>
-                    <br>
-                    <input type="text" class="controlPanelInput" id="searchlLibInput" name="searchlLibInput">
-                    <button id="searchlLibButton" class="iconButtons CLI" onclick="">
-                        <span id="searchlLibButton_span">
-                            <i class="fab fa-searchengin"></i>
-                        </span>
-                    </button>
-                    <br>
-                    <br>
-                    <span id="installLib_title_span" class="UIText">install library</span>
-                    <br>
-                    <input type="text" class="controlPanelInput" id="installLibInput" name="installLibInput">
-                    <button id="installLibButton" class="iconButtons CLI" onclick="">
-                        <span id="installLibButton_span">
-                            <i class="fas fa-cloud-download-alt"></i>
-                        </span>
-                    </button>
-                    <br>
-                </div>
-            </div>
-            <button class="accordion">
-                <!-- <select name="toolbox" onchange="document.forms.options.submit('options')"> -->
-                <!-- <option value="categories">Categories (untyped variables)</option> -->
-                <!-- <option value="categories-typed-variables">Categories (typed variables)</option> -->
-                <!-- <option value="simple">Simple</option> -->
-                <!-- <option value="test-blocks">Test Blocks</option> -->
-                <!-- </select> -->
-                <span id="categories_title_span" aria-expanded="false"
-                    aria-controls="accordion_categories_content"></span>
-            </button>
-            <div id="categories_content" class="side_content config_content panel UIText">
-            </div>
-            <button class="accordion">
-                <span id="iot_title_span" aria-expanded="false" aria-controls="accordion_categories_content"></span>
-            </button>
-            <div id="arrowhead_controls" class="side_content config_content panel UIText">
-                <input type="text" class="controlPanelInput" id="launchWebServerInput" name="launchWebServerInput">
-                <button id="launchWebServer" class="iconButtons CLI">
-                    <span id="launchWebServer_span">
-                        <i class="fas fa-network-wired"></i>
-                    </span>
-                </button>
-                <br>
-                <br>
-                <input type="text" class="controlPanelInput" id="papyrusConnectInput" name="papyrusConnectInput">
-                <button id="papyrusConnect" class="iconButtons CLI" onclick="papyrusConnect()">
-                    <span id="papyrusConnect_span">
-                        <img src="./blocklyduino/media/Eclipse_papyrus_logo.png"
-                            style="width: 30px; height: 30px; vertical-align: middle;" />
-                    </span>
-                </button>
-                <br>
-                <br>
-                <input type="text" class="controlPanelInput" id="arrowheadConnectInput" name="arrowheadConnectInput">
-                <button id="registerToOrchestrator" class="iconButtons CLI" onclick="ArrowheadRegister()">
-                    <span id="registerToOrchestrator_span">
-                        <img src="./blocklyduino/media/arrowheadtools_invert.png"
-                            style="width: 30px; height: 30px; vertical-align: middle;" />
-                    </span>
-                </button>
-                <br>
-                <br>
-                <input type="text" class="controlPanelInput" id="blynkConnectInput" name="blynkConnectInput">
-                <button id="blynkConnect" class="iconButtons CLI" onclick="">
-                    <span id="blynkConnect_span">
-                        <img src="./blocklyduino/media/blynk.png"
-                            style="width: 30px; height: 30px; vertical-align: middle;" />
-                    </span>
-                </button>
             </div>
         </div>
     </div>
@@ -603,6 +486,7 @@
 <script src="@blockly/core/theme/zelos.js" async></script>
 <!-- Blockly libraries of function, from different demos -->
 <script src="@blockly/demos/code/code.js"></script>
+<script src="js/settings.js"></script>
 <script src="@blockly/demos/keyboard_nav/line_cursor.js" async></script>
 <script src="@blockly/tests/playgrounds/screenshot.js" async></script>
 <!-- BlocklyDuino external toolbox hacked -->
@@ -799,6 +683,20 @@
         applyBoard(Edrys.getState(STATE_BOARD, "Value"))
 
         window.edrysBoardCallback = (id) => Edrys.getState(STATE_BOARD, "Value", id)
+
+        // Reset (menu): back to the start program and board from the module
+        // settings, for the whole room.
+        window.edrysReset = () => {
+            if (board && profile[board]) applyBoard(board)
+            if (!startCode || !tryApply(startCode, "The start program in the module settings")) {
+                Code.workspace.clear()
+            }
+            synced = workspaceXml()
+            Edrys.updateState(() => {
+                if (board && profile[board]) Edrys.getState(STATE_BOARD, "Value", board)
+                Edrys.getState(STATE_XML, "Value", synced)
+            })
+        }
 
         const room = Edrys.getState()
         const current = Edrys.getState(STATE_XML, "Value")

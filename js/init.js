@@ -66,7 +66,8 @@ Code.init = function () {
     }
 
     var match = location.search.match(/renderer=([^&]+)/);
-    var renderer = match ? match[1] : 'geras';
+    // URL parameters win over the user's Setup choices (js/settings.js)
+    var renderer = match ? match[1] : (Code.loadSettings().renderer || 'geras');
     document.forms.options.elements.renderer.value = renderer;
     Code.workspace = Blockly.inject('content_blocks', {
         comments: true,
@@ -160,7 +161,6 @@ Code.init = function () {
     Code.workspace.registerToolboxCategoryCallback('VARIABLE_TYPED_BOOLEAN', booleanVariablesCallBack);
 
     Code.workspace.configureContextMenu = configureContextualMenu.bind(Code.workspace);
-	Code.buildControlPanelForToolbox();
     // load blocks stored in session or passed by url
     var urlFile = Code.getStringParamFromUrl('url', '');
     var loadOnce = null;
@@ -195,9 +195,14 @@ Code.init = function () {
 
     //change theme color
     match = location.search.match(/theme=([^&]+)/);
-    var theme = match ? match[1] : 'classic';
+    var theme = match ? match[1] : (Code.loadSettings().theme || 'classic');
     document.forms.options.elements.theme.value = theme;
     changeTheme(theme);
+    var fontSize = Code.loadSettings().fontSize;
+    if (fontSize) {
+        document.getElementById('fontSizeRange').value = fontSize;
+        Code.changeRenderingConstant(fontSize);
+    }
 
     //keyboard nav attribution
     var actions = [
@@ -316,8 +321,6 @@ Code.initLanguage = function () {
     document.getElementById('appName').textContent = MSG['appName'];
     //change Blockly title buttons by this one
     document.getElementById('languageSpan').textContent = MSG['languageSpan'];
-    document.getElementById('interfaceColorSpan').textContent = MSG['interfaceColorSpan'];
-    document.getElementById('codeEditorColorSpan').textContent = MSG['codeEditorColorSpan'];
     document.getElementById('themeSpan').textContent = MSG['themeSpan'];
     document.getElementById('renderSpan').textContent = MSG['renderSpan'];
     // document.getElementById('serialButton').title = MSG['serialButtonSpan'];
@@ -364,18 +367,6 @@ Code.initLanguage = function () {
     document.getElementById('papyrusConnect_span_menu').textContent = MSG['loadXMLfakeButton_span'];
     document.getElementById('registerToOrchestrator_span_menu').textContent = MSG['registerToOrchestrator_span'];
     document.getElementById('blynkConnect_span_menu').textContent = MSG['blynkConnect_span'];
-    // CLI panel
-    document.getElementById('CLI_title_span').textContent = MSG['CLI_title_span'];
-    document.getElementById('CLI_githubLinkButton').title = MSG['CLI_githubLinkButton_span'];
-    document.getElementById('coreUpdateButton').title = MSG['coreUpdateButton_span'];
-    document.getElementById('cleanCLIcacheButton').title = MSG['cleanCLIcacheButton_span'];
-    document.getElementById('listBoardsButton').title = MSG['listBoardsButton_span'];
-    document.getElementById('installBoardsButton').title = MSG['installBoardsButton_span'];
-    document.getElementById('searchlLibButton').title = MSG['searchlLibButton_span'];
-    document.getElementById('installLibButton').title = MSG['installLibButton_span'];
-    document.getElementById('installBoard_title_span').textContent = MSG['installBoard_title_span'];
-    document.getElementById('searchlLib_title_span').textContent = MSG['searchlLib_title_span'];
-    document.getElementById('installLib_title_span').textContent = MSG['installLib_title_span'];
     //setup panel
     document.getElementById('config_UI_title_span').textContent = MSG['config_UI_title_span'];
     document.getElementById('accessibilitySpan').textContent = MSG['accessibilitySpan'];
@@ -391,19 +382,8 @@ Code.initLanguage = function () {
     document.getElementById('themeHighContrastSpan').textContent = MSG['themeHighContrastSpan'];
     document.getElementById('themeDarkSpan').textContent = MSG['themeDarkSpan'];
     document.getElementById('themeBwSpan').textContent = MSG['themeBwSpan'];
-    document.getElementById('displaySpan').textContent = MSG['displaySpan'];
-    document.getElementById('displayChoiceButtons').textContent = MSG['displayChoiceButtons'];
-    document.getElementById('displayChoiceBandT').textContent = MSG['displayChoiceBandT'];
-    document.getElementById('displayChoiceText').textContent = MSG['displayChoiceText'];
-    document.getElementById('fontSpan').textContent = MSG['fontSpan'];
-    document.getElementById('fontSizeSpan').textContent = MSG['fontSizeSpan'];
-    document.getElementById('optionFontSizeBlocks').textContent = MSG['optionFontSizeBlocks'];
-    document.getElementById('optionFontSizePage').textContent = MSG['optionFontSizePage'];
-    document.getElementById('optionFontSpacingPage').textContent = MSG['optionFontSpacingPage'];
-    //categories panel
-    document.getElementById('categories_title_span').textContent = MSG['categories_title_span'];
-    //IoT panel
-    document.getElementById('iot_title_span').textContent = MSG['iot_title_span'];
+    // the slider sets the size of blocks and code
+    document.getElementById('fontSizeSpan').textContent = MSG['optionFontSizeBlocks'];
     //board list modal
     document.getElementById('boardListModalHeader_span').textContent = MSG['boardListModalHeader_span'];
     //keyboard nav

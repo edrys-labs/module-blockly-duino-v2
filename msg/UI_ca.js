@@ -8,7 +8,7 @@ var MSG = {
     title: "BDuino",
     appName: "BlocklyDuino",
     blocks: "Blocs",
-    prog: "Program",
+    prog: "Programa",
     catLogic: "Lògica",
     catLoops: "Bucles",
     catMath: "Matemàtiques",
@@ -23,29 +23,29 @@ var MSG = {
     xmlError: "No es pot carregar el vostre fitxer desat. Tal vegada ha estat creat amb una altra versió de BlocklyDuino?",
     badXml: "Error d'anàlisi XML:\n%1\n\nSelecciona 'D\'acord' per abandonar els canvis o 'Cancel·la' per continuar editant el fitxer.",
     languageSpan: "tria idioma",
-    interfaceColorSpan: "interface theme",
-    codeEditorColorSpan: "code editor theme",
+    interfaceColorSpan: "tema de la interfície",
+    codeEditorColorSpan: "tema de l'editor de codi",
     themeSpan: "tria tema",
     renderSpan: "tria renderitzador",
-    fullScreenButton_span: "full screen",
+    fullScreenButton_span: "pantalla completa",
     undoButton_span: "Desfés",
     redoButton_span: "Refés",
-    boardButtonSpan: "list boards",
+    boardButtonSpan: "llista de plaques",
     verifyButton_span: "Verifica codi",
-    serialButtonSpan: "list COM port",
+    serialButtonSpan: "llista de ports COM",
     uploadButton_span: "Càrrega",
     serialConnectButton_span: "Monitor sèrie",
     saveCodeButton_span: "Exporta codi Arduino",
     newButton_span: "Projecte nou",
-    save_span: "Save file name?",
+    save_span: "Nom del fitxer?",
     saveXMLButton_span: "Desa fitxer BlocklyDuino",
     loadXMLfakeButton_span: "Carrega fitxer BlocklyDuino",
-    loadXML_span: "Replace existing blocks?\n'Cancel' will merge.",
-    loadXML_error_span: "Error parsing XML:\n",
+    loadXML_span: "Voleu substituir els blocs existents?\n'Cancel' els combinarà.",
+    loadXML_error_span: "Error en analitzar l'XML:\n",
     resetButton_span: "Restableix BlocklyDuino",
-    resetQuestion_span: "Reset BlocklyDuino and",
+    resetQuestion_span: "Restablir BlocklyDuino i",
     helpButton_span: "ajuda",
-    helpModalSpan_title: "Help - About",
+    helpModalSpan_title: "Ajuda - Quant a",
     helpModalSpan_text:
         '<table>' +
         '<tbody>' +
@@ -53,32 +53,32 @@ var MSG = {
         '<td style="width: 142px;"><img src="./blocklyduino/media/logo_only.png" alt="" width="129" height="144" /></td>' +
         '<td>' +
         '<p style="text-align: left;"><strong>BlocklyDuino</strong></p>' +
-        '<p style="text-align: left;">BlocklyDuino is a <strong>web program for editing and visual block programming for <a href="https://www.arduino.cc/">Arduino</a> boards</strong>. It is based on <a href="https://developers.google.com/blockly/">Blockly</a>, the graphical online programming editor and on the work done on <a href="https://github.com/A-S-T-U-C-E/STudio4Education">STudio4Education</a>, a similar project for <a href="https://www.st.com/">STmicroelectronics</a> boards.</p>' +
-        '<p style="text-align: left;">BlocklyDuino provides a block programming environment and their translation into \'Arduino\' C code.</p>' +
+        '<p style="text-align: left;">' + 'BlocklyDuino és un <strong>programa web per editar i programar amb blocs visuals plaques <a href="https://www.arduino.cc/">Arduino</a></strong>. Es basa en <a href="https://developers.google.com/blockly/">Blockly</a>, l\'editor gràfic de programació en línia, i en la feina de <a href="https://github.com/A-S-T-U-C-E/STudio4Education">STudio4Education</a>, un projecte semblant per a plaques de <a href="https://www.st.com/">STmicroelectronics</a>.' + '</p>' +
+        '<p style="text-align: left;">' + 'BlocklyDuino ofereix un entorn de programació amb blocs i la seva traducció a codi C per a \'Arduino\'.' + '</p>' +
         '</td>' +
         '</tr>' +
         '</tbody>' +
         '</table>' +
-        '<p style="text-align: left;">Accessibility: <a href="https://github.com/BlocklyDuino/BlocklyDuino-v2#accessibility">online documentation</a>.</p>' +
-        '<p style="text-align: left;">Official documentation: <a href="https://developers.google.com/blockly/guides/configure/web/keyboard-nav" rel="nofollow">Blockly developers</a>.</p>' +
-        '<p style="text-align: left;">Wiki: <a href="http://www.libreduc.cc/wiki">on LibrEduc</a>.</p>' +
-        '<p style="text-align: left;">A bug? Post it here: <a href="https://github.com/BlocklyDuino/BlocklyDuino-v2/issues">on Github</a>.</p>' +
-        '<p style="text-align: center;">v0.8.0 - license GNU GPL version 3 - Sébastien CANET',
+        '<p style="text-align: left;">' + 'Accessibilitat: <a href="https://github.com/BlocklyDuino/BlocklyDuino-v2#accessibility">documentació en línia</a>.' + '</p>' +
+        '<p style="text-align: left;">' + 'Documentació oficial: <a href="https://developers.google.com/blockly/guides/configure/web/keyboard-nav" rel="nofollow">desenvolupadors de Blockly</a>.' + '</p>' +
+        '<p style="text-align: left;">' + 'Wiki: <a href="http://www.libreduc.cc/wiki">a LibrEduc</a>.' + '</p>' +
+        '<p style="text-align: left;">' + 'Un error? Publica\'l aquí: <a href="https://github.com/BlocklyDuino/BlocklyDuino-v2/issues">a Github</a>.' + '</p>' +
+        '<p style="text-align: center;">' + 'v0.8.0 - llicència GNU GPL versió 3 - Sébastien CANET',
     //menu tools
-    toolsButton_span: "tools",
-    wiringButton_span: "wiring",
-    factoryButton_span: "block factory",
-    htmlButton_span: "HTML factory",
-    colorConversionButton_span: "colors encoding",
-    dataConversionButton_span: "data encoding",
+    toolsButton_span: "eines",
+    wiringButton_span: "cablejat",
+    factoryButton_span: "fàbrica de blocs",
+    htmlButton_span: "fàbrica HTML",
+    colorConversionButton_span: "codificació de colors",
+    dataConversionButton_span: "codificació de dades",
     //menu IoT
-    iotConnectButton_span: "servers",
-    launchWebServer_span: "local server",
-    papyrusConnect_span: "Papyrus connect",
-    registerToOrchestrator_span: "Arrowhead connect",
-    blynkConnect_span: "Blynk connect",
+    iotConnectButton_span: "servidors",
+    launchWebServer_span: "servidor local",
+    papyrusConnect_span: "Connecta amb Papyrus",
+    registerToOrchestrator_span: "Connecta amb Arrowhead",
+    blynkConnect_span: "Connecta amb Blynk",
     //ace editor
-    editorReadOnlyToggle_span: "code editor writable or read-only",
+    editorReadOnlyToggle_span: "editor de codi editable o només de lectura",
     copyCodeButton_span: "Copia codi a  porta-retalls",
     //lateral panel
     accessibilitySpan: "habilita mode accessibilitat",
@@ -116,12 +116,12 @@ var MSG = {
     actionName12: "mou l'espai de treball a dreta",
     actionName13: "commuta el teclat de navegació",
     setup_sideButton_span: "configura",
-    config_UI_title_span: "interface",
-    displaySpan: "display choice",
-    displayChoiceButtons: "buttons only",
-    displayChoiceBandT: "buttons + text",
-    displayChoiceText: "text only",
-    fontSpan: "font choice",
+    config_UI_title_span: "interfície",
+    displaySpan: "visualització",
+    displayChoiceButtons: "només botons",
+    displayChoiceBandT: "botons + text",
+    displayChoiceText: "només text",
+    fontSpan: "tipus de lletra",
     fontSizeSpan: "renderització",
     optionFontSizeBlocks: "Mida del tipus de lletra blocs",
     optionFontSizePage: "Mida del tipus de lletra pàgina",
@@ -146,28 +146,28 @@ var MSG = {
     installLibInput_span: "nom de la biblioteca a instal·lar",
     installLibButton_span: "instal·la aquesta biblioteca",
     //categories panel
-    categories_title_span: "categories choice",
+    categories_title_span: "elecció de categories",
     //arrowhead panel
-    iot_title_span: "IoT control",
+    iot_title_span: "control IoT",
     //modals
-    boardListModalHeader_span: "Boards list",
-    boardListModalButton_span: "Details",
+    boardListModalHeader_span: "Llista de plaques",
+    boardListModalButton_span: "Detalls",
     boardModal_connect: "Connector",
-    boardModal_voltage: "Operating voltage",
-    boardModal_voltage_normal: "Operating voltage (recommended)",
-    boardModal_voltage_maxi: "Operating voltage (limits)",
-    boardModal_cpu: "Microcontroler µC",
-    boardModal_speed: "Clock speed",
-    boardModal_inout: "Number of logical I/Os",
-    boardModal_in_analog: "Number of analogue I/Os",
-    boardModal_out_analog: "Number of PWM ouput",
-    boardModal_i_max_out: "Max. current per pin (5V)",
-    boardModal_i_max3: "Max. output current on pin 3.3V",
-    boardModal_i_max_5: "Max. output current on pin 5V",
-    boardModal_flash: "Flash memory",
-    boardModal_sram: "SRAM memory",
+    boardModal_voltage: "Tensió de funcionament",
+    boardModal_voltage_normal: "Tensió de funcionament (recomanada)",
+    boardModal_voltage_maxi: "Tensió de funcionament (límits)",
+    boardModal_cpu: "Microcontrolador µC",
+    boardModal_speed: "Velocitat de rellotge",
+    boardModal_inout: "Nombre d'E/S digitals",
+    boardModal_in_analog: "Nombre d'E/S analògiques",
+    boardModal_out_analog: "Nombre de sortides PWM",
+    boardModal_i_max_out: "Corrent màx. per pin (5V)",
+    boardModal_i_max3: "Corrent màx. de sortida al pin 3,3V",
+    boardModal_i_max_5: "Corrent màx. de sortida al pin 5V",
+    boardModal_flash: "Memòria Flash",
+    boardModal_sram: "Memòria SRAM",
     boardModal_eeprom: "EEPROM",
-    portListModalHeader_span: "COMM port list",
+    portListModalHeader_span: "Llista de ports COM",
     //IDE_functions.js
     IDE_connect: 'Connecta al port ',
     IDE_select_port: 'Selecciona el port !',
@@ -178,16 +178,16 @@ var MSG = {
     IDE_upload2: ' al port ',
     IDE_upload3: '\nCàrrega: en progres...\n<i class="fa fa-spinner fa-pulse fa-1_5x fa-fw"></i>',
     IDE_upload_ok: '\nCàrrega: D\'acord',
-    serial_btn_start: "<span class='fa fa-play'></span> Start",
-    serial_info_stop: 'stop<br>',
-    serial_btn_stop: "<span class='fa fa-pause'></span> Stop",
-    serial_info_start: 'communication starting<br>',
-    serial_CSV: 'Export data to CSV',
-    inputTextSerial: 'Text',
-    btn_serialSend_span: 'Send',
-    btn_serialConnect_span: 'Start',
-    btn_serialPeekClear_span: 'Clean',
-    btn_serialPeekCSV_span: 'Export',
-    btn_serialChart_span: 'Graph',
-    btn_serialChartPause_span: 'Start'
+    serial_btn_start: "<span class='fa fa-play'></span> Inicia",
+    serial_info_stop: "aturat<br>",
+    serial_btn_stop: "<span class='fa fa-pause'></span> Atura",
+    serial_info_start: "inici de la comunicació<br>",
+    serial_CSV: "Exporta les dades a CSV",
+    inputTextSerial: "Text",
+    btn_serialSend_span: "Envia",
+    btn_serialConnect_span: "Inicia",
+    btn_serialPeekClear_span: "Neteja",
+    btn_serialPeekCSV_span: "Exporta",
+    btn_serialChart_span: "Gràfic",
+    btn_serialChartPause_span: "Inicia"
 };

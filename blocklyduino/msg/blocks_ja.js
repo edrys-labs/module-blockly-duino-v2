@@ -12,9 +12,9 @@ goog.require('Blockly.Msg');
 
 //text in blocks
 Blockly.Msg.FIELDDROPDOWN = [["HIGH", "HIGH"], ["LOW", "LOW"]];
-Blockly.Msg.FIELDDROPDOWN_ONOFF = [["turn on", "ON"], ["turn off", "OFF"]];
-Blockly.Msg.FIELDDROPDOWN_ONOFF2 = [["switch on", "HIGH"], ["switch off", "LOW"]];
-Blockly.Msg.FIELDDROPDOWN_ONOFF3 = [["close", "HIGH"], ["open", "LOW"]];
+Blockly.Msg.FIELDDROPDOWN_ONOFF = [["オン", "ON"], ["オフ", "OFF"]];
+Blockly.Msg.FIELDDROPDOWN_ONOFF2 = [["オン", "HIGH"], ["オフ", "LOW"]];
+Blockly.Msg.FIELDDROPDOWN_ONOFF3 = [["閉じる", "HIGH"], ["開く", "LOW"]];
 
 //blockly logic
 Blockly.Msg.CONTROLS_SWITCH_CASEBREAK_TOOLTIP = "ケースブロックに条件を追加";
@@ -35,10 +35,10 @@ Blockly.Msg.CONTROLS_SWITCH_VAR_TOOLTIP = "追加するために左からここ�
 Blockly.Msg.CONTROLS_SWITCH_CASEBREAK_TOOLTIP = "ケース　ブレイク　実行を追加";//"Add additional case break do"
 Blockly.Msg.CONTROLS_SWITCH_DEFAULT_TOOLTIP = "デフォルトのアクションを追加";//"Add optional default action"
 //Arduino base cateory blocks
-Blockly.Msg.VAR_CREATE_INT = "integer";
-Blockly.Msg.VAR_CREATE_FLOAT = "float";
-Blockly.Msg.VAR_CREATE_STRING = "string";
-Blockly.Msg.VAR_CREATE_BOOLEAN = "boolean";
+Blockly.Msg.VAR_CREATE_INT = "整数";
+Blockly.Msg.VAR_CREATE_FLOAT = "小数";
+Blockly.Msg.VAR_CREATE_STRING = "文字列";
+Blockly.Msg.VAR_CREATE_BOOLEAN = "真偽値";
 Blockly.Msg.ARDUINO_INOUT_BUILDIN_LED_HELPURL = "http://arduino.cc/en/Reference/DigitalWrite";
 Blockly.Msg.ARDUINO_INOUT_BUILDIN_LED_INPUT = "LEDを設定";
 Blockly.Msg.ARDUINO_INOUT_BUILDIN_LED_TOOLTIP = "Arduinoボード上のLEDをオンオフします"; //"off or turn on the LED on the Arduino board";
@@ -63,9 +63,9 @@ Blockly.Msg.ARDUINO_BASE_DELAY_HELPURL = "http://arduino.cc/en/Reference/delay";
 Blockly.Msg.ARDUINO_BASE_ANGLE = "角度：";//"angle:";
 Blockly.Msg.ARDUINO_BASE_ANGLE_TOOLTIP = "0~180°の角度";//"angle value between 0~180°";
 Blockly.Msg.ARDUINO_BASE_ANGLE_HELPURL = "";
-Blockly.Msg.ARDUINO_BASE_MAP1 = "map";
-Blockly.Msg.ARDUINO_BASE_MAP2 = "value to [0-";
-Blockly.Msg.ARDUINO_BASE_MAP_TOOLTIP = "Re-maps a number from [0-1024] to another."
+Blockly.Msg.ARDUINO_BASE_MAP1 = "変換";
+Blockly.Msg.ARDUINO_BASE_MAP2 = "値を [0-";
+Blockly.Msg.ARDUINO_BASE_MAP_TOOLTIP = "数値を範囲 [0-1024] から別の範囲に変換します。";
 Blockly.Msg.ARDUINO_BASE_MAP_HELPURL = "https://www.arduino.cc/reference/en/language/functions/math/map/";
 Blockly.Msg.ARDUINO_TONE_INPUT1 = "サウンド出力　ピン：";
 Blockly.Msg.ARDUINO_TONE_INPUT2 = "周波数 (Hz)";
@@ -95,7 +95,7 @@ Blockly.Msg.SERIAL_PRINT_HELPURL = "http://www.arduino.cc/en/Serial/Print";
 //Arduino base servo category blocks
 Blockly.Msg.SERVO_MOVE_TOOLTIP = "0 ~ 180°　回転可能";
 Blockly.Msg.SERVO_MOVE_HELPURL = "http://www.arduino.cc/playground/ComponentLib/servo";
-Blockly.Msg.SERVO_PIN = "PIN#";
+Blockly.Msg.SERVO_PIN = "ピン";
 Blockly.Msg.SERVO_MOVE_INPUT = "サーボ駆動";
 Blockly.Msg.SERVO_MOVE_DEGREE = "設定角度 (0~180°)";
 Blockly.Msg.SERVO_READ_DEGREES_INPUT = "サーボモータの角度";
@@ -103,28 +103,28 @@ Blockly.Msg.SERVO_READ_DEGREES_TOOLTIP = "前回の回転角度を返す";
 Blockly.Msg.SERVO_READ_DEGREES_HELPURL = "http://www.arduino.cc/playground/ComponentLib/servo";
 
 //X-NUCLEO-IKS01A3 shield blocks: the X-NUCLEO-IKS01A3 is a motion MEMS and environmental sensor evaluation board system, for ST Nucleo boards.
-Blockly.Msg.X_NUCLEO_IKS01A3_Temp_Read_INPUT = "onboard temperature sensor value";
-Blockly.Msg.X_NUCLEO_IKS01A3_Temp_Read_TOOLTIP = "HTS221: capacitive digital temperature in °Celsius";
+Blockly.Msg.X_NUCLEO_IKS01A3_Temp_Read_INPUT = "内蔵温度センサーの値";
+Blockly.Msg.X_NUCLEO_IKS01A3_Temp_Read_TOOLTIP = "HTS221: 静電容量式デジタル温度（°C）";
 Blockly.Msg.X_NUCLEO_IKS01A3_Temp_Read_HELPURL = "onboard temperature sensor value";
-Blockly.Msg.X_NUCLEO_IKS01A3_Humidity_Read_INPUT = "onboard humidity sensor value";
-Blockly.Msg.X_NUCLEO_IKS01A3_Humidity_Read_TOOLTIP = "HTS221: capacitive digital relative humidity in percent";
+Blockly.Msg.X_NUCLEO_IKS01A3_Humidity_Read_INPUT = "内蔵湿度センサーの値";
+Blockly.Msg.X_NUCLEO_IKS01A3_Humidity_Read_TOOLTIP = "HTS221: 静電容量式デジタル相対湿度（%）";
 Blockly.Msg.X_NUCLEO_IKS01A3_Humidity_Read_HELPURL = "https://www.st.com/en/ecosystems/x-nucleo-iks01a3.html";
 
 //DS18B20 sensors
-Blockly.Msg.DS18B20_TEXT1 = "a DS18B20 sensor";
-Blockly.Msg.DS18B20_INPUT1 = "is connected on pin#";
-Blockly.Msg.DS18B20_INPUT2 = "address #";
-Blockly.Msg.DS18B20_TOOLTIP1 = "test if a DS18B20 temperature sensor is present, returns 'true' if present";
+Blockly.Msg.DS18B20_TEXT1 = "DS18B20 センサー";
+Blockly.Msg.DS18B20_INPUT1 = "の接続ピン";
+Blockly.Msg.DS18B20_INPUT2 = "アドレス";
+Blockly.Msg.DS18B20_TOOLTIP1 = "DS18B20 温度センサーがあるか調べ、あれば 'true' を返します";
 Blockly.Msg.DS18B20_HELPURL = "https://www.carnetdumaker.net/articles/mesurer-une-temperature-avec-un-capteur-1-wire-ds18b20-et-une-carte-arduino-genuino/";
-Blockly.Msg.DS18B20_TEXT2 = "sensor DS18B20 value";
-Blockly.Msg.DS18B20_TOOLTIP2 = "returns the value of the temperature sensor, as a floating number";
+Blockly.Msg.DS18B20_TEXT2 = "DS18B20 センサーの値";
+Blockly.Msg.DS18B20_TOOLTIP2 = "温度センサーの値を小数で返します";
 
 //Relays actuators
-Blockly.Msg.RELAY_LOGICAL_TEXT = "relay";
-Blockly.Msg.RELAY_LOGICAL_INPUT = "on pin#";
-Blockly.Msg.RELAY_LOGICAL_TOOLTIP = "the relay is a remote switch, it is a switch placed in a power circuit which is switched by a digital signal";
+Blockly.Msg.RELAY_LOGICAL_TEXT = "リレー";
+Blockly.Msg.RELAY_LOGICAL_INPUT = "ピン";
+Blockly.Msg.RELAY_LOGICAL_TOOLTIP = "リレーは、デジタル信号で電力回路を切り替える遠隔スイッチです";
 Blockly.Msg.RELAY_LOGICAL_HELPURL = "https://arduinogetstarted.com/tutorials/arduino-relay";
-Blockly.Msg.RELAY_MOSFET_TEXT = "MOSFET transistor";
-Blockly.Msg.RELAY_MOSFET_INPUT = "on pin#";
-Blockly.Msg.RELAY_MOSFET_TOOLTIP = "the MOSFET transistor is a remote switch, a switch in a power circuit that is switched by a digital signal";
+Blockly.Msg.RELAY_MOSFET_TEXT = "MOSFET トランジスタ";
+Blockly.Msg.RELAY_MOSFET_INPUT = "ピン";
+Blockly.Msg.RELAY_MOSFET_TOOLTIP = "MOSFET トランジスタは、デジタル信号で電力回路を切り替える遠隔スイッチです";
 Blockly.Msg.RELAY_MOSFET_HELPURL = "http://sin.lyceeleyguescouffignal.fr/irf520-mosfet-driver-module";

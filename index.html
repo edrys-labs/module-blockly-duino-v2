@@ -58,6 +58,9 @@
         #boardLabel {
             margin-left: 0.5rem;
             font-weight: normal;
+            /* "· Arduino Uno" keeps its order in right-to-left languages */
+            unicode-bidi: isolate;
+            direction: ltr;
         }
         /* Setup opens from the menu; its tab would sit over the run button. */
         #lateral-panel-setup-label {

@@ -11,7 +11,7 @@ var MSG = {
     prog: "Programme",
     catLogic: "Logique",
     catLoops: "Boucles",
-    catMath: "Math",
+    catMath: "Maths",
     catText: "Texte",
     catLists: "Listes",
     catColour: "Couleurs",

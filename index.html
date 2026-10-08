@@ -4,7 +4,7 @@
 <head>
     <meta name="fetch" content="false">
     <meta name="description"
-        content="Blockly-editor integration for <a href='https://www.arduino.cc' targe='_blank'>Arduino</a>. See the possible the possible configuration options:<br><br><a href='https://github.com/Cross-Lab-Project/edrys_module-blockly-duino-v2' target='_blank'>https://github.com/Cross-Lab-Project/edrys_module-blockly-duino-v2</a>" />
+        content="Program <a href='https://www.arduino.cc' target='_blank'>Arduino</a> boards with blocks, together: everyone in a room edits one program, and the run button sends the generated code to the station. Configuration options:<br><br><a href='https://github.com/edrys-labs/module-blockly-duino-v2' target='_blank'>https://github.com/edrys-labs/module-blockly-duino-v2</a>" />
     <meta name="show-in" content="*" />
     <meta charset="utf-8">
     <meta name="google" value="notranslate">
@@ -13,20 +13,21 @@
       name="module-config" 
       content="{
         'config': {
-          'runCommand': {
-            'type': string,
-            'hint': 'Message to listen to (Default: execute)'
+          'code': {
+            'type': 'code-area',
+            'hint': 'Blockly XML the room starts with (save it from the editor menu, or see the README). Empty: start with an empty program.'
           },
           'board': {
-            'type': string,
-            'hint': 'Board name (e.g.: arduino_mega)'
+            'type': 'select',
+            'options': ['arduino_uno', 'arduino_nano', 'arduino_mini', 'arduino_pro8', 'arduino_pro16', 'lilypad', 'arduino_mega', 'arduino_leonardo', 'arduino_micro', 'arduino_yun'],
+            'hint': 'Board the room starts with; sets the pins the blocks offer. Teachers and stations can change it in class.'
           },
-          'code': {
-            'type': text-area,
-            'hint': 'To initialize the editor (Check the module repo for examples)'
-          },
-        },
-      }" 
+          'runCommand': {
+            'type': 'string',
+            'hint': 'Subject the run button sends the Arduino code with, e.g. to a terminal module (default: execute)'
+          }
+        }
+      }"
     />
 
     <title>blocklyduino</title>

@@ -47,23 +47,18 @@ var MSG = {
     helpButton_span: "Hilfe",
     helpModalSpan_title: "Hilfe - Über",
     helpModalSpan_text:
-        '<table>' +
-        '<tbody>' +
-        '<tr>' +
-        '<td style="width: 142px;"><img src="./blocklyduino/media/logo_only.png" alt="" width="129" height="144" /></td>' +
-        '<td>' +
-        '<p style="text-align: left;"><strong>BlocklyDuino</strong></p>' +
-        '<p style="text-align: left;">BlocklyDuino ist ein <strong>Web-Programm zum Bearbeiten und visuellen Programmieren von <a href="https://www.arduino.cc/">Arduino</a>-Boards mit Bausteinen</strong>. Es basiert auf <a href="https://developers.google.com/blockly/">Blockly</a>, dem grafischen Online-Programmiereditor, und auf der Arbeit an <a href="https://github.com/A-S-T-U-C-E/STudio4Education">STudio4Education</a>, einem ähnlichen Projekt für Boards von <a href="https://www.st.com/">STmicroelectronics</a>.</p>' +
-        '<p style="text-align: left;">BlocklyDuino bietet eine Umgebung zum Programmieren mit Bausteinen und übersetzt sie in \'Arduino\'-C-Code.</p>' +
-        '</td>' +
-        '</tr>' +
-        '</tbody>' +
-        '</table>' +
-        '<p style="text-align: left;">Barrierefreiheit: <a href="https://github.com/BlocklyDuino/BlocklyDuino-v2#accessibility">Online-Dokumentation</a>.</p>' +
-        '<p style="text-align: left;">Offizielle Dokumentation: <a href="https://developers.google.com/blockly/guides/configure/web/keyboard-nav" rel="nofollow">Blockly-Entwickler</a>.</p>' +
-        '<p style="text-align: left;">Wiki: <a href="http://www.libreduc.cc/wiki">bei LibrEduc</a>.</p>' +
-        '<p style="text-align: left;">Einen Fehler gefunden? Melde ihn hier: <a href="https://github.com/BlocklyDuino/BlocklyDuino-v2/issues">auf Github</a>.</p>' +
-        '<p style="text-align: center;">v0.8.0 - Lizenz GNU GPL Version 3 - Sébastien CANET',
+        '<div style="text-align: start;">' +
+        '<img src="./blocklyduino/media/logo_only.png" alt="" width="64" height="72" style="float: inline-start; margin-inline-end: 1rem;" />' +
+        '<p><strong>' + 'BlocklyDuino in Edrys' + '</strong></p>' +
+        '<ul style="clear: both;">' +
+        '<li>' + 'Alle in diesem Raum arbeiten am selben Programm: deine Änderungen sehen die anderen, ihre siehst du.' + '</li>' +
+        '<li>' + 'Der Ausführen-Knopf (oben rechts) schickt den erzeugten Arduino-Code an die Station, die ihn auf das Board bringt.' + '</li>' +
+        '<li>' + 'Das Board neben dem Titel bestimmt, welche Pins die Bausteine anbieten. Die Lehrkraft oder die Station kann es ändern.' + '</li>' +
+        '<li>' + 'Sprache, Design der Bausteine und Schriftgröße sind deine eigenen Einstellungen: Menü, dann Einstellungen.' + '</li>' +
+        '<li>' + 'Arbeiten mit der Tastatur: Strg+Umschalt+K schaltet die Tastaturnavigation ein.' + '</li>' +
+        '</ul>' +
+        '<p style="font-size: smaller;">' + 'Basiert auf <a href="https://github.com/BlocklyDuino/BlocklyDuino" target="_blank">BlocklyDuino</a> von Sébastien Canet (GNU GPL 3) und <a href="https://developers.google.com/blockly/" target="_blank">Blockly</a>. Probleme oder Ideen: <a href="https://github.com/edrys-labs/module-blockly-duino-v2/issues" target="_blank">auf GitHub</a>.' + '</p>' +
+        '</div>',
     //menu tools
     toolsButton_span: "Werkzeuge",
     wiringButton_span: "Verdrahtung",

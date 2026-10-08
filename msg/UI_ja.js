@@ -47,23 +47,18 @@ var MSG = {
     helpButton_span: "ヘルプ",
     helpModalSpan_title: "ヘルプ - 情報",
     helpModalSpan_text:
-        '<table>' +
-        '<tbody>' +
-        '<tr>' +
-        '<td style="width: 142px;"><img src="./blocklyduino/media/logo_only.png" alt="" width="129" height="144" /></td>' +
-        '<td>' +
-        '<p style="text-align: left;"><strong>BlocklyDuino</strong></p>' +
-        '<p style="text-align: left;">' + 'BlocklyDuino は、<strong><a href="https://www.arduino.cc/">Arduino</a> ボードを視覚的なブロックで編集・プログラミングするための Web プログラム</strong>です。グラフィカルなオンラインプログラミングエディタ <a href="https://developers.google.com/blockly/">Blockly</a> と、<a href="https://www.st.com/">STmicroelectronics</a> ボード向けの同様のプロジェクト <a href="https://github.com/A-S-T-U-C-E/STudio4Education">STudio4Education</a> の成果をもとにしています。' + '</p>' +
-        '<p style="text-align: left;">' + 'BlocklyDuino はブロックによるプログラミング環境と、その \'Arduino\' C コードへの変換を提供します。' + '</p>' +
-        '</td>' +
-        '</tr>' +
-        '</tbody>' +
-        '</table>' +
-        '<p style="text-align: left;">' + 'アクセシビリティ: <a href="https://github.com/BlocklyDuino/BlocklyDuino-v2#accessibility">オンラインドキュメント</a>。' + '</p>' +
-        '<p style="text-align: left;">' + '公式ドキュメント: <a href="https://developers.google.com/blockly/guides/configure/web/keyboard-nav" rel="nofollow">Blockly 開発者向け</a>。' + '</p>' +
-        '<p style="text-align: left;">' + 'Wiki: <a href="http://www.libreduc.cc/wiki">LibrEduc</a>。' + '</p>' +
-        '<p style="text-align: left;">' + '不具合を見つけたら: <a href="https://github.com/BlocklyDuino/BlocklyDuino-v2/issues">Github</a> で報告してください。' + '</p>' +
-        '<p style="text-align: center;">' + 'v0.8.0 - ライセンス GNU GPL バージョン 3 - Sébastien CANET',
+        '<div style="text-align: start;">' +
+        '<img src="./blocklyduino/media/logo_only.png" alt="" width="64" height="72" style="float: inline-start; margin-inline-end: 1rem;" />' +
+        '<p><strong>' + 'Edrys の BlocklyDuino' + '</strong></p>' +
+        '<ul style="clear: both;">' +
+        '<li>' + 'この部屋の全員が同じプログラムを編集します。あなたの変更は他の人に、他の人の変更はあなたに表示されます。' + '</li>' +
+        '<li>' + '実行ボタン（右上）は、生成された Arduino コードをステーションに送り、ステーションがボードに書き込みます。' + '</li>' +
+        '<li>' + 'タイトルの横のボードによって、ブロックで選べるピンが決まります。先生またはステーションが変更できます。' + '</li>' +
+        '<li>' + '言語、ブロックのテーマ、文字サイズはあなた個人の設定です。メニューから設定を開いてください。' + '</li>' +
+        '<li>' + 'キーボード操作: Ctrl+Shift+K でキーボードナビゲーションがオンになります。' + '</li>' +
+        '</ul>' +
+        '<p style="font-size: smaller;">' + '<a href="https://github.com/BlocklyDuino/BlocklyDuino" target="_blank">BlocklyDuino</a>（Sébastien Canet 作、GNU GPL 3）と <a href="https://developers.google.com/blockly/" target="_blank">Blockly</a> をもとにしています。問題やアイデアは <a href="https://github.com/edrys-labs/module-blockly-duino-v2/issues" target="_blank">GitHub</a> へ。' + '</p>' +
+        '</div>',
     //menu tools
     toolsButton_span: "ツール",
     wiringButton_span: "配線",

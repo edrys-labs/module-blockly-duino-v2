@@ -47,23 +47,18 @@ var MSG = {
     helpButton_span: "aide",
     helpModalSpan_title: "Aide",
     helpModalSpan_text:
-        '<table>' +
-        '<tbody>' +
-        '<tr>' +
-        '<td style="width: 142px;"><img src="./blocklyduino/media/logo_only.png" alt="" width="129" height="144" /></td>' +
-        '<td>' +
-        '<p style="text-align: left;"><strong>BlocklyDuino</strong></p>' +
-        '<p style="text-align: left;">BlocklyDuino est un <strong>programme web d\'édition et de programmation visuelle par blocs pour les cartes <a href="https://www.arduino.cc/">Arduino</a>, </strong>il est basé sur <a href="https://developers.google.com/blockly/" rel="nofollow">Blockly</a>, l\'éditeur graphique de programmation en ligne ainsi que sur le travail fait sur <a href="https://github.com/A-S-T-U-C-E/STudio4Education">STudio4Education</a>, projet similaire pour les cartes <strong> <a href="https://www.st.com" rel="nofollow">ST microelectronics.</a></strong></p>' +
-        '<p style="text-align: left;">BlocklyDuino fournit un environnement de programmation par blocs et leurs traductions en code C \'Arduino\'</p>' +
-        '</td>' +
-        '</tr>' +
-        '</tbody>' +
-        '</table>' +
-        '<p style="text-align: left;">Accessibilité : <a href="https://github.com/BlocklyDuino/BlocklyDuino-v2#accessibility">documentation en ligne</a>.</p>' +
-        '<p style="text-align: left;">Documentation officielle : <a href="https://developers.google.com/blockly/guides/configure/web/keyboard-nav" rel="nofollow">développeurs Blockly</a>.</p>' +
-        '<p style="text-align: left;">Wiki : <a href="http://www.libreduc.cc/wiki">chez LibrEduc</a>.</p>' +
-        '<p style="text-align: left;">Un bug ? Merci d\'écrire ici : <a href="https://github.com/BlocklyDuino/BlocklyDuino-v2/issues">sur Github</a>.</p>' +
-        '<p style="text-align: center;">v0.8.0 - license GNU GPL version 3 - Sébastien CANET',
+        '<div style="text-align: start;">' +
+        '<img src="./blocklyduino/media/logo_only.png" alt="" width="64" height="72" style="float: inline-start; margin-inline-end: 1rem;" />' +
+        '<p><strong>' + 'BlocklyDuino dans Edrys' + '</strong></p>' +
+        '<ul style="clear: both;">' +
+        '<li>' + 'Tout le monde dans cette salle travaille sur le même programme : vos modifications apparaissent chez les autres, et les leurs chez vous.' + '</li>' +
+        '<li>' + 'Le bouton d\'exécution (en haut à droite) envoie le code Arduino généré à la station, qui le charge sur la carte.' + '</li>' +
+        '<li>' + 'La carte affichée à côté du titre détermine les broches proposées par les blocs. L\'enseignant ou la station peut la changer.' + '</li>' +
+        '<li>' + 'La langue, le thème des blocs et la taille du texte sont vos réglages personnels : menu, puis réglages.' + '</li>' +
+        '<li>' + 'Au clavier : Ctrl+Maj+K active la navigation au clavier.' + '</li>' +
+        '</ul>' +
+        '<p style="font-size: smaller;">' + 'Basé sur <a href="https://github.com/BlocklyDuino/BlocklyDuino" target="_blank">BlocklyDuino</a> de Sébastien Canet (GNU GPL 3) et sur <a href="https://developers.google.com/blockly/" target="_blank">Blockly</a>. Problèmes ou idées : <a href="https://github.com/edrys-labs/module-blockly-duino-v2/issues" target="_blank">sur GitHub</a>.' + '</p>' +
+        '</div>',
     //menu tools
     toolsButton_span: "outils",
     wiringButton_span: "câblage de circuits",

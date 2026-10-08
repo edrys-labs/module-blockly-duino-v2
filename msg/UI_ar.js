@@ -47,23 +47,18 @@ var MSG = {
     helpButton_span: "مساعدة",
     helpModalSpan_title: "مساعدة - حول",
     helpModalSpan_text:
-        '<table>' +
-        '<tbody>' +
-        '<tr>' +
-        '<td style="width: 142px;"><img src="./blocklyduino/media/logo_only.png" alt="" width="129" height="144" /></td>' +
-        '<td>' +
-        '<p style="text-align: right;"><strong>BlocklyDuino</strong></p>' +
-        '<p style="text-align: right;">BlocklyDuino هو <strong>برنامج ويب لتحرير البرامج وبرمجتها بالكتل المرئية للوحات <a href="https://www.arduino.cc/">Arduino</a></strong>. يعتمد على <a href="https://developers.google.com/blockly/">Blockly</a>، محرر البرمجة الرسومي على الإنترنت، وعلى العمل المنجز في <a href="https://github.com/A-S-T-U-C-E/STudio4Education">STudio4Education</a>، وهو مشروع مشابه للوحات <a href="https://www.st.com/">STmicroelectronics</a>.</p>' +
-        '<p style="text-align: right;">يوفّر BlocklyDuino بيئة للبرمجة بالكتل وترجمتها إلى شيفرة C لـ\'Arduino\'.</p>' +
-        '</td>' +
-        '</tr>' +
-        '</tbody>' +
-        '</table>' +
-        '<p style="text-align: right;">إمكانية الوصول: <a href="https://github.com/BlocklyDuino/BlocklyDuino-v2#accessibility">التوثيق على الإنترنت</a>.</p>' +
-        '<p style="text-align: right;">التوثيق الرسمي: <a href="https://developers.google.com/blockly/guides/configure/web/keyboard-nav" rel="nofollow">مطوّرو Blockly</a>.</p>' +
-        '<p style="text-align: right;">الويكي: <a href="http://www.libreduc.cc/wiki">على LibrEduc</a>.</p>' +
-        '<p style="text-align: right;">وجدت خطأً؟ أبلغ عنه هنا: <a href="https://github.com/BlocklyDuino/BlocklyDuino-v2/issues">على Github</a>.</p>' +
-        '<p style="text-align: center;">الإصدار v0.8.0 - الترخيص GNU GPL الإصدار 3 - Sébastien CANET',
+        '<div style="text-align: start;">' +
+        '<img src="./blocklyduino/media/logo_only.png" alt="" width="64" height="72" style="float: inline-start; margin-inline-end: 1rem;" />' +
+        '<p><strong>' + 'BlocklyDuino في Edrys' + '</strong></p>' +
+        '<ul style="clear: both;">' +
+        '<li>' + 'يعمل كل من في هذه الغرفة على البرنامج نفسه: تظهر تغييراتك للآخرين، وتظهر تغييراتهم لك.' + '</li>' +
+        '<li>' + 'يرسل زر التشغيل (أعلى اليمين) شيفرة Arduino المولّدة إلى المحطة، التي ترفعها إلى اللوحة.' + '</li>' +
+        '<li>' + 'اللوحة المعروضة بجانب العنوان تحدد الأطراف التي تقدمها الكتل. يمكن للمعلم أو للمحطة تغييرها.' + '</li>' +
+        '<li>' + 'اللغة وسمة الكتل وحجم الخط إعدادات خاصة بك: القائمة، ثم الإعدادات.' + '</li>' +
+        '<li>' + 'العمل بلوحة المفاتيح: Ctrl+Shift+K يشغّل التنقل بلوحة المفاتيح.' + '</li>' +
+        '</ul>' +
+        '<p style="font-size: smaller;">' + 'مبني على <a href="https://github.com/BlocklyDuino/BlocklyDuino" target="_blank">BlocklyDuino</a> من Sébastien Canet (GNU GPL 3) وعلى <a href="https://developers.google.com/blockly/" target="_blank">Blockly</a>. مشاكل أو أفكار: <a href="https://github.com/edrys-labs/module-blockly-duino-v2/issues" target="_blank">على GitHub</a>.' + '</p>' +
+        '</div>',
     //menu tools
     toolsButton_span: "أدوات",
     wiringButton_span: "التوصيلات",

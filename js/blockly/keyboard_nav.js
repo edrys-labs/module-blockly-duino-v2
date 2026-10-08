@@ -305,8 +305,8 @@ function createKeyMappingList(actions) {
 function toggleDisplayKeyMappings(state) {
     if (state) {
         document.getElementById('keyboard_nav').style.display = 'block';
-        document.getElementById('keyboard_nav').style.left = (top.innerWidth - document.getElementById('keyboard_nav').offsetWidth) / 2 + "px";
-        document.getElementById('keyboard_nav').style.top = (top.innerHeight - document.getElementById('keyboard_nav').offsetHeight) / 2 + "px";
+        document.getElementById('keyboard_nav').style.left = (window.innerWidth - document.getElementById('keyboard_nav').offsetWidth) / 2 + "px";
+        document.getElementById('keyboard_nav').style.top = (window.innerHeight - document.getElementById('keyboard_nav').offsetHeight) / 2 + "px";
     } else {
         document.getElementById('keyboard_nav').style.display = 'none';
     }

@@ -118,16 +118,16 @@ Code.init = function () {
             element = element.offsetParent;
         } while (element);
 
-        let width = (container.offsetWidth <= document.body.offsetWidth ? container.offsetWidth : document.body.offsetWidth - 60)
-        
+        let width = Math.min(container.offsetWidth, document.body.offsetWidth)
+
         blocklyDiv.style.left = x + 'px';
         blocklyDiv.style.top = y + 'px';
         blocklyDiv.style.width = width + 'px';
         blocklyDiv.style.height = container.offsetHeight + 'px';
         Blockly.svgResize(Code.workspace);
 
-        document.getElementById("content_code").style.width = (document.body.offsetWidth - 20 - width) + "px"
-        // Ace only measures its container on window resize; the pane width also changes here.
+        // The code pane takes the rest of the row (flex: 1). Ace only measures
+        // its container on window resize; the pane width also changes here.
         editor.resize()
 
 //        if (Code.workspace.RTL) {
@@ -144,6 +144,10 @@ Code.init = function () {
 //        blocklyDiv.style.top = metrics.absoluteTop + 'px';
     };
     window.addEventListener('resize', onresize, false);
+    // The block area is positioned absolutely over #content_area: follow its
+    // size, which can settle after the window's resize event (Edrys resizes
+    // the iframe, the separator moves, the narrow layout kicks in).
+    new ResizeObserver(() => onresize()).observe(container);
     
     //button callback register with functions
     Code.workspace.registerButtonCallback('createVarBtnInt', createVarBtnIntCallBack);

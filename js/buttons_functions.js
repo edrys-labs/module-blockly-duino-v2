@@ -366,8 +366,8 @@ function toggleDisplayHelpModal() {
     if (!HelpModalDisplay_) {
         document.getElementById('helpModal').style.display = 'block';
     	document.getElementById('helpModal').classList.add('show');
-        document.getElementById('helpModal').style.left = (top.innerWidth - document.getElementById('helpModal').offsetWidth) / 2 + "px";
-        document.getElementById('helpModal').style.top = (top.innerHeight - document.getElementById('helpModal').offsetHeight) / 2 + "px";
+        document.getElementById('helpModal').style.left = (window.innerWidth - document.getElementById('helpModal').offsetWidth) / 2 + "px";
+        document.getElementById('helpModal').style.top = (window.innerHeight - document.getElementById('helpModal').offsetHeight) / 2 + "px";
         helpButton.className = 'iconButtonsClicked';
     } else {
         document.getElementById('helpModal').style.display = 'none';

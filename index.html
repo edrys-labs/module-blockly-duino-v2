@@ -59,6 +59,40 @@
             margin-left: 0.5rem;
             font-weight: normal;
         }
+        /* The layout table: keep it at the module's width. Its cells would
+           otherwise grow with the block area, which init.js sizes to them. */
+        #globalTable {
+            table-layout: fixed;
+        }
+        /* The board dialog never gets wider than the module. */
+        .modal {
+            max-width: calc(100% - 1rem);
+            left: max(0.5rem, calc(50% - 350px));
+        }
+        /* Narrow modules: the blocks get the whole width (the code is still
+           sent by the run button and copied by the copy button), and the
+           top bar keeps to one row. */
+        @media (max-width: 600px) {
+            #content_area {
+                width: 100% !important;
+            }
+            #separator,
+            #content_code,
+            #appName,
+            #board_mini_picture_div {
+                display: none;
+            }
+        }
+        @media (max-width: 420px) {
+            /* the code is not shown at this width anyway */
+            #boardLabel,
+            #copyCodeButton {
+                display: none;
+            }
+        }
+        .helpModal {
+            max-width: calc(100% - 3rem);
+        }
     </style>
 </head>
 
@@ -290,6 +324,9 @@
     <div id="helpModal" class="helpModal">
         <div id="helpModal_header">
             <span id="helpModalSpan_title"></span>
+            <!-- the dialog can cover the menu that opened it -->
+            <span class="closeModal" id="closeHelpModal" role="button" title="Close" aria-label="Close"
+                onclick="toggleDisplayHelpModal()">&times;</span>
         </div>
         <div id="helpModal_text">
             <span id="helpModalSpan_text"></span>

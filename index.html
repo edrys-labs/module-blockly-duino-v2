@@ -77,6 +77,12 @@
             font-size: x-large;
             font-weight: bold;
         }
+        #setup_header .closeModal {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
         #setup_content label.UIText {
             margin-right: 0.25rem;
         }
@@ -365,7 +371,9 @@
     </div>
     <!-- Setup: per-user settings (js/settings.js), opened from the menu -->
     <div id="lateral-panel-setup">
-        <input id="lateral-panel-setup-input" type="checkbox">
+        <!-- opened and closed from code: focusing it (it sits far off to the right)
+             would scroll the edrys page sideways -->
+        <input id="lateral-panel-setup-input" type="checkbox" tabindex="-1">
         <label id="lateral-panel-setup-label" for="lateral-panel-setup-input" class="label_panel">
             <span id="setup_side_span">
                 <i class="fas fa-cog"></i>
@@ -374,8 +382,8 @@
         <div id="lateral-panel-setup-bloc">
             <div id="setup_header">
                 <span id="config_UI_title_span"></span>
-                <label for="lateral-panel-setup-input" class="closeModal" role="button" title="Close"
-                    aria-label="Close">&times;</label>
+                <button type="button" class="closeModal" title="Close" aria-label="Close"
+                    onclick="document.getElementById('lateral-panel-setup-input').click(); document.getElementById('menuButton').focus()">&times;</button>
             </div>
             <div id="setup_content" class="side_content config_content">
                 <form id="options" onsubmit="return false">

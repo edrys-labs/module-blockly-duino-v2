@@ -37,6 +37,24 @@
     <link rel="stylesheet" href="css/UI.css" />
     <link rel="stylesheet" href="blocklyduino/css/blocklyduino.css" />
     <link rel="stylesheet" href="blocklyduino/css/override_css.css" />
+    <style>
+        /* Problems with the Edrys configuration, pinned over the bottom of the workspace. */
+        #edrysErrors {
+            position: fixed;
+            left: 0.5rem;
+            right: 0.5rem;
+            bottom: 0.5rem;
+            z-index: 100;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            background: #b8384a;
+            color: #fff;
+            font-family: sans-serif;
+        }
+        #edrysErrors[hidden] {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -279,6 +297,7 @@
             </tr>
         </table>
     </div>
+    <div id="edrysErrors" role="alert" hidden></div>
     <div id="helpModal" class="helpModal">
         <div id="helpModal_header">
             <span id="helpModalSpan_title"></span>
@@ -747,11 +766,36 @@
         }
     }
 
-    Edrys.onReady(() => {
-        const startCode = Edrys.module.config.code
-        const board = Edrys.module.config.board
+    function showError(message) {
+        const item = document.createElement("div")
+        item.textContent = message
+        const box = document.getElementById("edrysErrors")
+        box.appendChild(item)
+        box.hidden = false
+    }
 
-        if (board) {
+    // Loads xml, reporting what went wrong instead of throwing.
+    function tryApply(xml, what) {
+        try {
+            apply(xml)
+            return true
+        } catch (e) {
+            showError(what + " could not be loaded: " + e.message)
+            return false
+        }
+    }
+
+    Edrys.onReady(() => {
+        const config = Edrys.module.config
+        if (config && typeof config !== "object") {
+            showError("The module settings are not valid JSON/YAML; they were ignored.")
+        }
+        const { code: startCode, board } = (typeof config === "object" && config) || {}
+
+        if (board && !profile[board]) {
+            showError('Unknown board "' + board + '" in the module settings. Known boards: ' +
+                Object.keys(profile).filter((id) => id !== "none" && id !== "default").join(", ") + ".")
+        } else if (board) {
             Code.changeBoard(board)
         }
 
@@ -759,21 +803,30 @@
         const current = Edrys.getState(STATE_XML, "Value")
 
         // Start from config.code only if the room has no program yet, or the
-        // teacher changed config.code since the program was started.
+        // teacher changed config.code since the program was started. It is
+        // written to the room only once it loaded, so a broken start program
+        // does not reach the other peers.
         if (startCode && (!current || Edrys.getState(STATE_SEED, "Value") !== startCode)) {
-            Edrys.updateState(() => {
-                Edrys.getState(STATE_SEED, "Value", startCode)
-                Edrys.getState(STATE_XML, "Value", startCode)
-            })
-            apply(startCode)
+            if (tryApply(startCode, "The start program in the module settings")) {
+                // Store the loaded workspace, not startCode: block ids are
+                // assigned on load, and a peer publishing them later would
+                // overwrite edits made in the meantime.
+                synced = workspaceXml()
+                Edrys.updateState(() => {
+                    Edrys.getState(STATE_SEED, "Value", startCode)
+                    Edrys.getState(STATE_XML, "Value", synced)
+                })
+            } else if (current) {
+                tryApply(current, "The shared program")
+            }
         } else if (current) {
-            apply(current)
+            tryApply(current, "The shared program")
         }
 
         room.observe((event) => {
             if (event.transaction.local || !event.keysChanged.has(STATE_XML)) return
             const xml = room.get(STATE_XML)
-            if (xml && xml !== synced) apply(xml)
+            if (xml && xml !== synced) tryApply(xml, "A change from another participant")
         })
 
         window.edrysCallback = callback()

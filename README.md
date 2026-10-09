@@ -98,8 +98,9 @@ cursor. See Blockly's [keyboard navigation guide](https://developers.google.com/
 
 ## Development
 
-The Edrys part is in [index.html](index.html) (the script at the end) and [js/settings.js](js/settings.js); the
-rest is BlocklyDuino v2 and Blockly 3 (September 2020) as upstream left them, trimmed to what works in a browser.
+The Edrys part is in [js/edrys.js](js/edrys.js) (shared program and board, status, run, reset),
+[js/settings.js](js/settings.js) (personal Setup choices) and [css/edrys.css](css/edrys.css); the rest is
+BlocklyDuino v2 and Blockly 3 (September 2020) as upstream left them, trimmed to what works in a browser.
 The shared state is kept in the room, under these keys:
 
 | Key | Content |

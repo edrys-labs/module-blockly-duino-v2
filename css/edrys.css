@@ -1,0 +1,146 @@
+/* Styles of the Edrys module, on top of upstream BlocklyDuino's (loaded after them). */
+
+/* Problems with the Edrys configuration, pinned over the bottom of the workspace. */
+#edrysErrors {
+    position: fixed;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    z-index: 100;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    background: #b8384a;
+    color: #fff;
+    font-family: sans-serif;
+}
+#edrysErrors[hidden] {
+    display: none;
+}
+/* Top bar: menu, title, board and sync state, then the controls at the end. */
+#topBar,
+#topBarControls {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    min-width: 0;
+}
+#topBarControls {
+    margin-inline-start: auto;
+    flex-shrink: 0;
+}
+/* edrys-Lite draws the module's name (its <title>) over the top-right
+   corner as a drag handle; the controls sit just below it. */
+#topBar {
+    padding-top: 13px;
+}
+#topBar .TitleText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* a round button: equal width and height, icon centred */
+#runButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 50%;
+}
+#runButton i {
+    /* the play triangle looks centred a little right of the middle */
+    margin-left: 3px;
+    font-size: 0.8em;
+}
+#syncStatus {
+    flex-shrink: 0;
+    padding: 0.1rem 0.5rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font: 0.8rem sans-serif;
+    white-space: nowrap;
+}
+#syncStatus::before {
+    content: "\25CF\00A0";
+    color: #ffcc00;
+}
+#syncStatus[data-state="saved"]::before {
+    color: #7ee29a;
+}
+#syncStatus[data-state="error"] {
+    background: #b8384a;
+}
+#syncStatus[data-state="error"]::before {
+    color: #fff;
+}
+#boardLabel {
+    font-weight: normal;
+    /* "· Arduino Uno" keeps its order in right-to-left languages */
+    unicode-bidi: isolate;
+    direction: ltr;
+}
+/* Setup opens from the menu; its tab would sit over the run button. */
+#lateral-panel-setup-label {
+    display: none;
+}
+#lateral-panel-setup,
+#lateral-panel-setup-bloc {
+    max-width: 100vw;
+}
+#setup_header {
+    padding: 0.5rem 0.75rem;
+    background-color: #006468;
+    color: #fff;
+    font-size: x-large;
+    font-weight: bold;
+}
+#setup_header .closeModal {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+#setup_content label.UIText {
+    margin-right: 0.25rem;
+}
+/* menu entries open on their text as well as their icon */
+.menu_text {
+    cursor: pointer;
+}
+/* The layout table: keep it at the module's width. Its cells would
+   otherwise grow with the block area, which init.js sizes to them. */
+#globalTable {
+    table-layout: fixed;
+}
+/* The board dialog never gets wider than the module. */
+.modal {
+    max-width: calc(100% - 1rem);
+    left: max(0.5rem, calc(50% - 350px));
+}
+/* Narrow modules: the blocks get the whole width (the code is still
+   sent by the run button and copied by the copy button), and the
+   top bar keeps to one row. */
+@media (max-width: 600px) {
+    #content_area {
+        width: 100% !important;
+    }
+    #separator,
+    #content_code,
+    #appName,
+    #board_mini_picture_div {
+        display: none;
+    }
+}
+@media (max-width: 420px) {
+    /* the code is not shown at this width anyway */
+    #boardLabel,
+    #copyCodeButton,
+    #fullScreenButton {
+        display: none;
+    }
+}
+.helpModal {
+    max-width: calc(100% - 3rem);
+}

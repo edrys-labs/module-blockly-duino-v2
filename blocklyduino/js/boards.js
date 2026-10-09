@@ -13,8 +13,9 @@
 
 goog.provide('Blockly.Boards');
 
-//set default profile
-profile.default = profile["none"][0];
+//set default profile: "none" has no pin lists, so blocks with a pin dropdown
+//could not be created; without a board the Arduino Uno pins are used
+profile.default = profile["arduino_uno"][0];
 
 /**
  * Set board when click in board modal
@@ -23,12 +24,12 @@ Code.setBoard = function (boardId) {
 	if (boardId == undefined) {
 		boardId = Code.getStringParamFromUrl('board', '');
 	}
-    if (!boardId) {
-        boardId = "none";
+    if (!boardId || boardId === "none") {
+        boardId = "arduino_uno";
     }
     document.getElementById('boardMenu').value = boardId;
     profile.default = profile[boardId][0];
-    document.getElementById('boardLabel').textContent = boardId === 'none' ? '' : '· ' + profile.default.description;
+    document.getElementById('boardLabel').textContent = '· ' + profile.default.description;
 };
 
 /**

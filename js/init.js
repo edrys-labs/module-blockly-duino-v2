@@ -10,6 +10,11 @@
  */
 
 /**
+ * True when the module runs in an iframe, as it does in Edrys.
+ */
+Code.inEdrys = window.self !== window.top;
+
+/**
  * Load blocks saved in session/local storage.
  * @param {string} defaultXml Text representation of default blocks.
  */
@@ -21,7 +26,11 @@ Code.loadBlocks = function (defaultXml) {
         // Restarting Firefox fixes this, so it looks like a bug.
         var loadOnce = null;
     }
-    if (loadOnce) {
+    if (loadOnce && Code.inEdrys) {
+        // Edrys: the room has the current program, loaded in Edrys.onReady with
+        // the room's board. Blocks restored here would load before that board.
+        delete window.sessionStorage.loadOnceBlocks;
+    } else if (loadOnce) {
         // Language switching stores the blocks during the reload.
         delete window.sessionStorage.loadOnceBlocks;
         var xml = Blockly.Xml.textToDom(loadOnce);
@@ -185,8 +194,10 @@ Code.init = function () {
     }
 
     // Code.loadBlocks('');
-    // Hook a save function onto unload.
-    window.addEventListener('unload', auto_save_and_restore_blocks, false);
+    // Hook a save function onto unload (not in Edrys, see Code.loadBlocks).
+    if (!Code.inEdrys) {
+        window.addEventListener('unload', auto_save_and_restore_blocks, false);
+    }
     if ('BlocklyStorage' in window) {
         BlocklyStorage.backupOnUnload(Code.workspace);
     }

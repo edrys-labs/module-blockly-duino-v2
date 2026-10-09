@@ -41,6 +41,7 @@ Code.setBoard = function (boardId) {
  * - "arduino_leonardo"
  * - "arduino_mega"
  * - "arduino_micro"
+ * - "arduino_mini"
  * - "arduino_nano"
  * - "arduino_pro8"
  * - "arduino_pro16"

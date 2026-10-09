@@ -113,7 +113,7 @@ The shared state is kept in the room, under these keys:
 Personal settings are stored in `localStorage` under `module-blockly-duino-v2.settings`.
 
 End-to-end tests (teacher and student in a real edrys-Lite) are in the edrys-module-tests repository under
-`modules/module-blockly-duino-v2`.
+`modules/module-blockly-duino-v2`. They run in Chromium, Firefox and WebKit (Safari's engine).
 
 ## Credits
 

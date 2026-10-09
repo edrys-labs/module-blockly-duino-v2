@@ -169,7 +169,7 @@
                             </div>
                             <div id="separator">
                                 <label id="editorReadOnlyToggle" class="switch">
-                                    <input type="checkbox" onclick="toggleEditorReadOnly(this)">
+                                    <input type="checkbox" autocomplete="off" onclick="toggleEditorReadOnly(this)">
                                     <span class="slider"></span>
                                 </label>
                             </div>
@@ -202,7 +202,9 @@
     <div id="lateral-panel-setup">
         <!-- opened and closed from code: focusing it (it sits far off to the right)
              would scroll the edrys page sideways -->
-        <input id="lateral-panel-setup-input" type="checkbox" tabindex="-1">
+        <!-- autocomplete="off": Firefox would restore it checked after a reload (e.g. a
+             language switch), and Setup would open again by itself -->
+        <input id="lateral-panel-setup-input" type="checkbox" tabindex="-1" autocomplete="off">
         <label id="lateral-panel-setup-label" for="lateral-panel-setup-input" class="label_panel">
             <span id="setup_side_span">
                 <i class="fas fa-cog"></i>
@@ -215,7 +217,7 @@
                     onclick="document.getElementById('lateral-panel-setup-input').click(); document.getElementById('menuButton').focus()">&times;</button>
             </div>
             <div id="setup_content" class="side_content config_content">
-                <form id="options" onsubmit="return false">
+                <form id="options" onsubmit="return false" autocomplete="off">
                     <select id="boardMenu" style='display:none'>
                         <option value="none" selected="selected">...</option>
                         <option value="arduino_leonardo">Arduino Leonardo</option>

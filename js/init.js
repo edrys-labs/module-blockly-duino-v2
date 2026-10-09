@@ -338,7 +338,13 @@ Code.initLanguage = function () {
     document.getElementById('fullScreenButton').title = MSG['fullScreenButton_span'];
     document.getElementById('undoButton').title = MSG['undoButton_span'];
     document.getElementById('redoButton').title = MSG['redoButton_span'];
-    document.getElementById('uploadButton').title = MSG['uploadButton_span'];
+    var runButton = document.getElementById('runButton');
+    runButton.title = MSG['runButton_span'];
+    runButton.setAttribute('aria-label', MSG['runButton_span']);
+    // the Edrys layer may have set a state before the strings were in
+    if (window.edrysSetStatus) {
+        window.edrysSetStatus();
+    }
     document.getElementById('saveCodeButton').title = MSG['saveCodeButton_span'];
     document.getElementById('newButton').title = MSG['newButton_span'];
     document.getElementById('saveXMLButton').title = MSG['saveXMLButton_span'];

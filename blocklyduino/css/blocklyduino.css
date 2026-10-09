@@ -84,11 +84,6 @@
 }
 
 /* boutons classiques */
-#uploadButton,
-#serialConnectButton
-{
-    border-radius: 50%;
-}
 #resetButton{
     background: #FF0000;
 }

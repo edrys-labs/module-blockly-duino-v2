@@ -55,8 +55,66 @@
         #edrysErrors[hidden] {
             display: none;
         }
+        /* Top bar: menu, title, board and sync state, then the controls at the end. */
+        #topBar,
+        #topBarControls {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            min-width: 0;
+        }
+        #topBarControls {
+            margin-inline-start: auto;
+            flex-shrink: 0;
+        }
+        /* edrys-Lite draws the module's name (its <title>) over the top-right
+           corner as a drag handle; the controls sit just below it. */
+        #topBar {
+            padding-top: 13px;
+        }
+        #topBar .TitleText {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        /* a round button: equal width and height, icon centred */
+        #runButton {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            border-radius: 50%;
+        }
+        #runButton i {
+            /* the play triangle looks centred a little right of the middle */
+            margin-left: 3px;
+            font-size: 0.8em;
+        }
+        #syncStatus {
+            flex-shrink: 0;
+            padding: 0.1rem 0.5rem;
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font: 0.8rem sans-serif;
+            white-space: nowrap;
+        }
+        #syncStatus::before {
+            content: "\25CF\00A0";
+            color: #ffcc00;
+        }
+        #syncStatus[data-state="saved"]::before {
+            color: #7ee29a;
+        }
+        #syncStatus[data-state="error"] {
+            background: #b8384a;
+        }
+        #syncStatus[data-state="error"]::before {
+            color: #fff;
+        }
         #boardLabel {
-            margin-left: 0.5rem;
             font-weight: normal;
             /* "· Arduino Uno" keeps its order in right-to-left languages */
             unicode-bidi: isolate;
@@ -117,7 +175,8 @@
         @media (max-width: 420px) {
             /* the code is not shown at this width anyway */
             #boardLabel,
-            #copyCodeButton {
+            #copyCodeButton,
+            #fullScreenButton {
                 display: none;
             }
         }
@@ -132,7 +191,8 @@
         <table id="globalTable">
             <tr id="optionsTop">
                 <td colspan="2" id="functionsIcons" class="tabMiddle">
-                    <button id="menuButton" class="iconButtons" style="float: left"
+                  <div id="topBar">
+                    <button id="menuButton" class="iconButtons"
                         onclick="document.getElementById('menuPopup').style.display = 'block';document.getElementById('menuButton').classList.toggle('active');">
                         <span id="menuButtonButton_span">
                             <img src="./blocklyduino/media/logo_only2.png"
@@ -141,9 +201,11 @@
                     </button>
 
 
-                    <span class="TitleText" style="float: left" id="appName"></span>
+                    <span class="TitleText" id="appName"></span>
                     <!-- the room's board, set in Code.setBoard -->
-                    <span class="TitleText" style="float: left" id="boardLabel" title="Board"></span>
+                    <span class="TitleText" id="boardLabel" title="Board"></span>
+                    <!-- sync state, set by setStatus() in the Edrys layer -->
+                    <span id="syncStatus" role="status" data-state="connecting"></span>
 
                     <!-- <span class="sketch_name_wrapper"> -->
                     <!-- <i class="mdi-image-edit sketch_name_icon active"></i> -->
@@ -203,6 +265,7 @@
                             </div>
                         </div>
                     </div>
+                    <span id="topBarControls">
                     <button id="fullScreenButton" class="iconButtons" onclick="fullScreen()">
                         <span id="fullScreenButton_span">
                             <i class="fas fa-expand-arrows-alt"></i>
@@ -218,6 +281,25 @@
                             <i class="fas fa-redo-alt"></i>
                         </span>
                     </button>
+                    <!-- shown to teachers and stations in Edrys.onReady -->
+                    <button id="boardButton" class="iconButtons" style="display: none" title="Board" aria-label="Board"
+                        onclick="Code.boardsListModalShow()">
+                        <span id="boardButton_span">
+                            <i class="fas fa-microchip"></i>
+                        </span>
+                    </button>
+
+                    <button id="copyCodeButton" class="iconButtons" onclick="Code.copyToClipboard()">
+                        <span id="copyCodeButton_span">
+                            <i class="far fa-copy"></i>
+                        </span>
+                    </button>
+
+                    <!-- title and aria-label set in Code.initLanguage -->
+                    <button id="runButton" class="iconButtons" onclick="window.run()">
+                        <i class="fas fa-play" aria-hidden="true"></i>
+                    </button>
+                    </span>
                     <div id="toolsPopup" class="popup_bckgrd" style="display:none"
                         onclick="document.getElementById('toolsPopup').style.display = 'none';">
                         <div id="buttonsToolsPopup" class="menu_div">
@@ -305,28 +387,7 @@
                         </div>
                     </div>
 
-                    <!-- shown to teachers and stations in Edrys.onReady -->
-                    <button id="boardButton" class="iconButtons" style="display: none" title="Board" aria-label="Board"
-                        onclick="Code.boardsListModalShow()">
-                        <span id="boardButton_span">
-                            <i class="fas fa-microchip"></i>
-                        </span>
-                    </button>
-
-                    <div style="float:right">
-                        <button id="copyCodeButton" class="iconButtons" onclick="Code.copyToClipboard()">
-                            <span id="copyCodeButton_span">
-                                <i class="far fa-copy"></i>
-                            </span>
-                        </button>
-
-                        <button id="uploadButton" class="iconButtons" onclick="window.run()">
-                            <span id="uploadButton_span">
-                                <i class="fas fa-sign-out-alt"></i>
-                            </span>
-                        </button>
-                    </div>
-
+                  </div>
 
                 </td>
             </tr>
@@ -610,6 +671,20 @@
     // peer from writing back what it just received.
     let synced = ""
 
+    // The sync state in the top bar: connecting (until onReady), sending (an
+    // edit waits to be written to the room), saved, or error (the banner shows
+    // a problem). Called without an argument, it only refreshes the text.
+    let status = "connecting"
+    function setStatus(state = status) {
+        status = state
+        const shown = document.getElementById("edrysErrors").hidden || state === "connecting" ? state : "error"
+        const badge = document.getElementById("syncStatus")
+        badge.dataset.state = shown
+        badge.textContent = (window.MSG && MSG["status_" + shown]) || shown
+    }
+    window.edrysSetStatus = setStatus
+    setStatus()
+
     function workspaceXml() {
         return Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace()))
     }
@@ -625,9 +700,11 @@
         function publish() {
             timerID = null
             const text = workspaceXml()
-            if (text === synced) return
-            synced = text
-            Edrys.getState(STATE_XML, "Value", text)
+            if (text !== synced) {
+                synced = text
+                Edrys.getState(STATE_XML, "Value", text)
+            }
+            setStatus("saved")
         }
 
         return () => {
@@ -636,6 +713,8 @@
             }
 
             timerID = window.setTimeout(publish, delay)
+            // change events also fire for e.g. selecting a block
+            if (status !== "sending" && workspaceXml() !== synced) setStatus("sending")
         }
     }
 
@@ -645,6 +724,7 @@
         const box = document.getElementById("edrysErrors")
         box.appendChild(item)
         box.hidden = false
+        setStatus()
     }
 
     function applyBoard(id) {
@@ -730,6 +810,9 @@
             }
         } else if (current) {
             tryApply(current, "The shared program")
+        } else {
+            // an empty room and no start program: nothing to send yet
+            synced = workspaceXml()
         }
 
         room.observe((event) => {
@@ -742,6 +825,7 @@
         })
 
         window.edrysCallback = callback()
+        setStatus("saved")
     });
 
    

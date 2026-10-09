@@ -62,9 +62,6 @@
     font-size: x-large;
     width: 32px;
 }
-.CLI {
-    margin: 5px;
-}
 /* surcharger .iconButton */
 #boardMenu, #serialMenu{
     color: #000000;

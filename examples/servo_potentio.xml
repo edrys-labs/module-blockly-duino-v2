@@ -1,26 +1,28 @@
-<xml xmlns="http://www.w3.org/1999/xhtml">
-    <block type="servo_move" id="9" inline="false" x="4" y="37">
-        <field name="PIN">A4</field><value name="DEGREE">
-            <block type="base_map" id="10" inline="true">
-                <value name="NUM"><block type="grove_rotary_angle" id="11">
-                        <field name="PIN">A0</field>
-                    </block>
-                </value>
-                <value name="DMAX">
-                    <block type="math_number" id="12">
-                        <field name="NUM">180</field>
-                    </block>
-                </value>
-            </block>
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="servo_move" inline="false" x="4" y="37">
+    <field name="PIN">9</field>
+    <value name="DEGREE">
+      <block type="board_base_map">
+        <value name="NUM">
+          <block type="grove_rotary_angle">
+            <field name="PIN">A0</field>
+          </block>
         </value>
-        <next>
-            <block type="base_delay" id="87">
-                <value name="DELAY_TIME">
-                    <block type="math_number" id="88">
-                        <field name="NUM">200</field>
-                    </block>
-                </value>
-            </block>
-        </next>
-    </block>
+        <value name="DMAX">
+          <block type="math_number">
+            <field name="NUM">180</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="board_base_delay">
+        <value name="DELAY_TIME">
+          <block type="math_number">
+            <field name="NUM">200</field>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
 </xml>

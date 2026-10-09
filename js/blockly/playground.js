@@ -127,30 +127,17 @@ function fontSpacingPageModify(classToModify, spacingToModify) {
 function setOnOffLine() {
     // Set different config online vs local copy.
     if (location.protocol === 'file:') {
-        // not same button if in Electron or browser, if local nodejs watches events
-        document.getElementById('wiringButton').onclick = "";
-        document.getElementById('factoryButton').onclick = "";
-        document.getElementById('htmlButton').onclick = "";
         //modifiy icons in menu button to be precise, if it's online or local file
         document.getElementById('newButton_span').innerHTML = '<i class="far fa-file"></i>';
         document.getElementById('loadXMLfakeButton_span').innerHTML = '<i class="far fa-folder-open"></i>';
         document.getElementById('saveXMLButton_span').innerHTML = '<i class="far fa-save"></i>';
         document.getElementById('saveCodeButton_span').innerHTML = '<i class="far fa-file-code"></i>';
     } else {
-        
-        // not same button if in Electron or browser, if web just webpages launched in browser
-        document.getElementById('wiringButton').onclick = "parent.open('tools/hackcable/index.html')";
-        document.getElementById('factoryButton').onclick = "Code.BlockFactory()')";
-        document.getElementById('htmlButton').onclick = "parent.open('tools/html/html_factory.html')";
         //modifiy icons in menu button to be precise, if it's online or local file
         document.getElementById('newButton_span').innerHTML = '<i class="far fa-file"></i>';
         document.getElementById('loadXMLfakeButton_span').innerHTML = '<i class="fas fa-file-upload"></i>';
         document.getElementById('saveXMLButton_span').innerHTML = '<i class="fas fa-file-download"></i>';
         document.getElementById('saveCodeButton_span').innerHTML = '<i class="fas fa-file-export"></i>';
-        // hide everything relative to arduino-cli if online
-        var elmts = getElementsByClass("CLI", null, null);
-        for (var i = 0; i < elmts.length; i++)
-            elmts[i].disabled = true;
     }
     document.getElementsByClassName("ace_content").position = "";
 }

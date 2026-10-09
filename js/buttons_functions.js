@@ -146,17 +146,6 @@ Code.Redo = function () {
 };
 
 /**
- * Luanch blockFatcory with language argument
- */
-Code.BlockFactory = function () {
-    var lang = Code.getStringParamFromUrl('lang', '');
-    if (!lang) {
-        lang = "en";
-    }
-    parent.open('tools/blockFactory/blockFactory.html?lang=' + lang);
-};
-
-/**
  * Creates an INO file containing the Arduino code from the Blockly workspace and
  * prompts the users to save it into their local file system.
  */

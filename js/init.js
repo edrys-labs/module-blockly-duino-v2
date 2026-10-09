@@ -363,27 +363,6 @@ Code.initLanguage = function () {
     document.getElementById('helpModalSpan_text').innerHTML = MSG['helpModalSpan_text'];
     document.getElementById('copyCodeButton').title = MSG['copyCodeButton_span'];
     document.getElementById('keyMappingModalSpan').textContent = MSG['keyMappingModalSpan'];
-    // menu tools
-    // document.getElementById('toolsButton').title = MSG['toolsButton_span'];
-    document.getElementById('wiringButton').title = MSG['wiringButton_span'];
-    document.getElementById('factoryButton').title = MSG['factoryButton_span'];
-    document.getElementById('htmlButton').title = MSG['htmlButton_span'];
-    document.getElementById('colorConversionButton').title = MSG['colorConversionButton_span'];
-    document.getElementById('dataConversionButton').title = MSG['dataConversionButton_span'];
-    document.getElementById('wiringButton_span_menu').textContent = MSG['wiringButton_span'];
-    document.getElementById('factoryButton_span_menu').textContent = MSG['factoryButton_span'];
-    document.getElementById('htmlButton_span_menu').textContent = MSG['htmlButton_span'];
-    document.getElementById('colorConversionButton_span_menu').textContent = MSG['colorConversionButton_span'];
-    document.getElementById('dataConversionButton_span_menu').textContent = MSG['dataConversionButton_span'];
-    // menu IoT
-    document.getElementById('launchWebServer').title = MSG['launchWebServer_span'];
-    document.getElementById('papyrusConnect').title = MSG['papyrusConnect_span'];
-    document.getElementById('registerToOrchestrator').title = MSG['registerToOrchestrator_span'];
-    document.getElementById('blynkConnect').title = MSG['blynkConnect_span'];
-    document.getElementById('launchWebServer_span_menu').textContent = MSG['launchWebServer_span'];
-    document.getElementById('papyrusConnect_span_menu').textContent = MSG['loadXMLfakeButton_span'];
-    document.getElementById('registerToOrchestrator_span_menu').textContent = MSG['registerToOrchestrator_span'];
-    document.getElementById('blynkConnect_span_menu').textContent = MSG['blynkConnect_span'];
     //setup panel
     document.getElementById('config_UI_title_span').textContent = MSG['config_UI_title_span'];
     document.getElementById('accessibilitySpan').textContent = MSG['accessibilitySpan'];

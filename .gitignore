@@ -1,0 +1,11 @@
+# logs and sync databases of local tools
+*.log
+*.ffs_db
+
+# editors and OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+node_modules/

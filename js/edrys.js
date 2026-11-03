@@ -42,6 +42,33 @@ function setStatus(state = status) {
 window.edrysSetStatus = setStatus
 setStatus()
 
+// The workspace, toolbox, flyout and scrollbars in the classroom's colours
+// (--edrys-* from edrys-module.css). Block colours stay with the block theme
+// each user picks in Setup, so this goes into every block theme.
+function applyClassroomTheme() {
+    const css = getComputedStyle(document.documentElement)
+    const color = (name) => css.getPropertyValue(name).trim()
+    const styles = {
+        workspaceBackgroundColour: color("--edrys-bg"),
+        toolboxBackgroundColour: color("--edrys-bg"),
+        toolboxForegroundColour: color("--edrys-text"),
+        flyoutBackgroundColour: color("--edrys-footer"),
+        flyoutForegroundColour: color("--edrys-text"),
+        flyoutOpacity: 0.95,
+        scrollbarColour: color("--edrys-scrollbar"),
+        scrollbarOpacity: 0.7,
+        insertionMarkerColour: color("--edrys-heading"),
+    }
+    for (const theme of Object.values(Blockly.Themes)) {
+        if (!theme || typeof theme.setComponentStyle !== "function") continue
+        for (const [name, value] of Object.entries(styles)) theme.setComponentStyle(name, value)
+    }
+    const workspace = Blockly.getMainWorkspace()
+    if (workspace) workspace.setTheme(workspace.getTheme())
+}
+applyClassroomTheme()
+Edrys.onTheme?.(applyClassroomTheme)
+
 function workspaceXml() {
     return Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace()))
 }

@@ -108,12 +108,12 @@ Code.boardsListModalShow = function () {
     document.getElementById('overlayForModals').style.display = "block";
     document.getElementById('boardListModal').classList.add('show');
     for (var i = 0; i < document.getElementById("boardDescriptionSelector").length; i++)
-        document.getElementById("boardDescriptionSelector").options[i].style.backgroundColor = 'white';
+        document.getElementById("boardDescriptionSelector").options[i].style.backgroundColor = '';
     var boardValue = document.getElementById("boardMenu").value;
     if (boardValue !== 'none') {
         document.getElementById("boardDescriptionSelector").selectedIndex = boardValue;
         document.getElementById("boardDescriptionSelector").value = boardValue;
-        document.getElementById("boardDescriptionSelector").options[document.getElementById("boardDescriptionSelector").selectedIndex].style.backgroundColor = 'yellow';
+        document.getElementById("boardDescriptionSelector").options[document.getElementById("boardDescriptionSelector").selectedIndex].style.backgroundColor = 'var(--edrys-highlight)';
     }
     Code.boardDescription();
 };

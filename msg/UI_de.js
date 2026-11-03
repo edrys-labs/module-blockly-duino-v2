@@ -57,7 +57,7 @@ var MSG = {
         '<ul style="clear: both;">' +
         '<li>' + 'Alle in diesem Raum arbeiten am selben Programm: deine Änderungen sehen die anderen, ihre siehst du.' + '</li>' +
         '<li>' + 'Der Ausführen-Knopf (oben rechts) schickt den erzeugten Arduino-Code an die Station, die ihn auf das Board bringt.' + '</li>' +
-        '<li>' + 'Das Board neben dem Titel bestimmt, welche Pins die Bausteine anbieten. Die Lehrkraft oder die Station kann es ändern.' + '</li>' +
+        '<li>' + 'Das Board in der oberen Leiste bestimmt, welche Pins die Bausteine anbieten. Die Lehrkraft oder die Station kann es ändern.' + '</li>' +
         '<li>' + 'Sprache, Design der Bausteine und Schriftgröße sind deine eigenen Einstellungen: Menü, dann Einstellungen.' + '</li>' +
         '<li>' + 'Arbeiten mit der Tastatur: Strg+Umschalt+K schaltet die Tastaturnavigation ein.' + '</li>' +
         '</ul>' +

@@ -57,7 +57,7 @@ var MSG = {
         '<ul style="clear: both;">' +
         '<li>' + 'Tout le monde dans cette salle travaille sur le même programme : vos modifications apparaissent chez les autres, et les leurs chez vous.' + '</li>' +
         '<li>' + 'Le bouton d\'exécution (en haut à droite) envoie le code Arduino généré à la station, qui le charge sur la carte.' + '</li>' +
-        '<li>' + 'La carte affichée à côté du titre détermine les broches proposées par les blocs. L\'enseignant ou la station peut la changer.' + '</li>' +
+        '<li>' + 'La carte affichée dans la barre du haut détermine les broches proposées par les blocs. L\'enseignant ou la station peut la changer.' + '</li>' +
         '<li>' + 'La langue, le thème des blocs et la taille du texte sont vos réglages personnels : menu, puis réglages.' + '</li>' +
         '<li>' + 'Au clavier : Ctrl+Maj+K active la navigation au clavier.' + '</li>' +
         '</ul>' +

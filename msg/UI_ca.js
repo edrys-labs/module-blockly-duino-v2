@@ -57,7 +57,7 @@ var MSG = {
         '<ul style="clear: both;">' +
         '<li>' + 'Tothom en aquesta sala treballa en el mateix programa: els teus canvis apareixen per als altres i els seus per a tu.' + '</li>' +
         '<li>' + 'El botó d\'executar (a dalt a la dreta) envia el codi Arduino generat a l\'estació, que el carrega a la placa.' + '</li>' +
-        '<li>' + 'La placa al costat del títol determina quins pins ofereixen els blocs. El professorat o l\'estació la poden canviar.' + '</li>' +
+        '<li>' + 'La placa de la barra superior determina quins pins ofereixen els blocs. El professorat o l\'estació la poden canviar.' + '</li>' +
         '<li>' + 'L\'idioma, el tema dels blocs i la mida de la lletra són configuracions teves: menú i després configuració.' + '</li>' +
         '<li>' + 'Amb el teclat: Ctrl+Maj+K activa la navegació amb teclat.' + '</li>' +
         '</ul>' +

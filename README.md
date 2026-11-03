@@ -7,6 +7,9 @@ sends the generated code to the station, for example to a terminal module that c
 
 ![The blink example: blocks on the left, the generated Arduino code on the right, the board and sync state in the top bar](screenshot.png)
 
+The module follows the classroom's light or dark theme (the operating system's when opened on its own); the block
+colours come from the block theme each user picks in Setup.
+
 ## Usage
 
 Add the module to your class with this URL:

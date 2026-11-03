@@ -31,6 +31,8 @@
 
     <title>blocklyduino</title>
     <link rel="icon" type="image/png" href="blocklyduino/media/logo_only.png" />
+    <!-- the shared look of edrys-Lite modules, in the classroom's theme; upstream styles go on top -->
+    <link rel="stylesheet" href="https://edrys-labs.github.io/module/edrys-module.css" />
     <link rel="stylesheet" href="css/font_awesome_all.min.css" />
     <link rel="stylesheet" href="css/keyboard_nav.css" />
     <link rel="stylesheet" href="css/lateral-panel.css" />
@@ -392,9 +394,15 @@
 <script src="blocklyduino/themes/themes_categories.js"></script>
 <script src="blocklyduino/themes/themes_components_override.js"></script>
 <script>
+    // the colours are in css/edrys.css (.ace-edrys), from the classroom's theme
+    ace.define("ace/theme/edrys", ["require", "exports"], function (require, exports) {
+        exports.isDark = false;
+        exports.cssClass = "ace-edrys";
+        exports.cssText = "";
+    });
     ace.require("ace/ext/language_tools");
     var editor = ace.edit("content_code");
-    editor.setTheme("ace/theme/sqlserver");
+    editor.setTheme("ace/theme/edrys");
     editor.session.setMode("ace/mode/c_cpp");
     editor.setShowPrintMargin(false);
     editor.setOptions({
@@ -404,7 +412,8 @@
         animatedScroll: true,
         enableBasicAutocompletion: false,
         enableSnippets: false,
-        enableLiveAutocompletion: false
+        enableLiveAutocompletion: false,
+        fontFamily: "'JetBrains Mono Variable', ui-monospace, monospace"
     });
 </script>
 <script src="https://edrys-labs.github.io/module/edrys.js"></script>

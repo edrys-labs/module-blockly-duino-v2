@@ -1,4 +1,12 @@
-/* Styles of the Edrys module, on top of upstream BlocklyDuino's (loaded after them). */
+/* Styles of the Edrys module, on top of upstream BlocklyDuino's (loaded after them).
+   Colours come from edrys-module.css (--edrys-*), in the classroom's light or
+   dark theme; js/edrys.js gives them to Blockly, the Ace theme below reads them. */
+
+body,
+.content_wrapper {
+    background-color: var(--edrys-bg);
+    color: var(--edrys-text);
+}
 
 /* Problems with the Edrys configuration, pinned over the bottom of the workspace. */
 #edrysErrors {
@@ -8,79 +16,168 @@
     bottom: 0.5rem;
     z-index: 100;
     padding: 0.5rem 0.75rem;
-    border-radius: 6px;
-    background: #b8384a;
-    color: #fff;
-    font-family: sans-serif;
+    border-radius: 8px;
+    background: var(--edrys-error-pill);
+    color: var(--edrys-on-error-pill);
+    font: 600 13px var(--edrys-font);
 }
 #edrysErrors[hidden] {
     display: none;
 }
-/* Top bar: menu, title, board and sync state, then the controls at the end. */
+/* Top bar: menu, board and sync state, then the controls at the end. */
 #topBar,
 #topBarControls {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 4px;
     min-width: 0;
 }
 #topBarControls {
     margin-inline-start: auto;
     flex-shrink: 0;
 }
-/* edrys-Lite draws the module's name (its <title>) over the top-right
-   corner as a drag handle; the controls sit just below it. */
 #topBar {
-    padding-top: 13px;
+    gap: 8px;
+    min-height: 40px;
+    box-sizing: border-box;
+    padding: 4px 8px;
+    border-bottom: 1px solid var(--edrys-line);
+}
+#functionsIcons {
+    padding: 0;
+}
+/* the frame shows the module's name, so no title inside */
+#appName {
+    display: none;
 }
 #topBar .TitleText {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-/* a round button: equal width and height, icon centred */
-#runButton {
+#boardLabel {
+    color: var(--edrys-muted);
+    font: 400 12px var(--edrys-font);
+}
+.iconButtons {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 32px;
     height: 32px;
     padding: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--edrys-muted);
+    font-size: 16px;
+    transition: none;
+}
+.iconButtons:hover:not(:disabled) {
+    background: var(--edrys-button);
+    color: var(--edrys-heading);
+}
+.iconButtons:active {
+    background: var(--edrys-button-hover);
+}
+.iconButtons:disabled {
+    background: transparent;
+    color: var(--edrys-muted);
+    opacity: 0.5;
+}
+#menuButton.active {
+    transform: none;
+    background: var(--edrys-button);
+}
+#menuButton img {
+    width: 20px !important;
+}
+/* the run button is the module's main action */
+#runButton,
+#runButton:hover:not(:disabled) {
     border-radius: 50%;
+    background: var(--edrys-primary);
+    color: var(--edrys-on-primary);
+}
+#runButton:hover:not(:disabled) {
+    filter: brightness(1.1);
 }
 #runButton i {
     /* the play triangle looks centred a little right of the middle */
-    margin-left: 3px;
-    font-size: 0.8em;
+    margin-left: 2px;
+    font-size: 12px;
 }
+/* the sync state as a status pill */
 #syncStatus {
+    display: inline-flex;
     flex-shrink: 0;
-    padding: 0.1rem 0.5rem;
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.15);
-    color: #fff;
-    font: 0.8rem sans-serif;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--edrys-pill);
+    color: var(--edrys-on-pill);
+    font: 600 12px var(--edrys-font);
     white-space: nowrap;
 }
 #syncStatus::before {
-    content: "\25CF\00A0";
-    color: #ffcc00;
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--edrys-warn);
+}
+#syncStatus[data-state="saved"] {
+    background: var(--edrys-ok-pill);
+    color: var(--edrys-on-ok-pill);
 }
 #syncStatus[data-state="saved"]::before {
-    color: #7ee29a;
+    background: var(--edrys-ok);
 }
 #syncStatus[data-state="error"] {
-    background: #b8384a;
+    background: var(--edrys-error-pill);
+    color: var(--edrys-on-error-pill);
 }
 #syncStatus[data-state="error"]::before {
-    color: #fff;
+    background: var(--edrys-error);
 }
-#boardLabel {
-    font-weight: normal;
-    /* "· Arduino Uno" keeps its order in right-to-left languages */
-    unicode-bidi: isolate;
-    direction: ltr;
+
+/* The menu */
+.popup_bckgrd {
+    background: rgba(0, 0, 0, 0.3);
 }
+#buttonsMenuPopup {
+    top: 40px;
+    left: 4px;
+    width: auto;
+    min-height: 0;
+    padding: 6px;
+    border: 1px solid var(--edrys-line);
+    border-radius: 12px;
+    background: var(--edrys-bg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+#buttonsMenuPopupInside {
+    background: none;
+}
+#buttonsMenuPopupInside hr {
+    border: 0;
+    border-top: 1px solid var(--edrys-line);
+}
+#buttonsMenuPopupInside .iconButtons {
+    color: var(--edrys-muted);
+}
+#buttonsMenuPopupInside #resetButton,
+#buttonsMenuPopupInside #resetButton:hover:not(:disabled) {
+    background: transparent;
+    color: var(--edrys-error);
+}
+/* menu entries open on their text as well as their icon */
+.menu_text {
+    cursor: pointer;
+    color: var(--edrys-heading);
+    font: 600 14px var(--edrys-font);
+}
+
 /* Setup opens from the menu; its tab would sit over the run button. */
 #lateral-panel-setup-label {
     display: none;
@@ -89,36 +186,198 @@
 #lateral-panel-setup-bloc {
     max-width: 100vw;
 }
-#setup_header {
-    padding: 0.5rem 0.75rem;
-    background-color: #006468;
-    color: #fff;
-    font-size: x-large;
-    font-weight: bold;
+#lateral-panel-setup-bloc {
+    border-left: 1px solid var(--edrys-line);
+    background: var(--edrys-bg);
+    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.18);
 }
+#setup_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--edrys-line);
+    background: var(--edrys-bg);
+    color: var(--edrys-heading);
+    font: 700 18px var(--edrys-font);
+}
+.closeModal,
 #setup_header .closeModal {
-    background: none;
+    padding: 0 6px;
     border: none;
-    padding: 0;
+    border-radius: 7px;
+    background: none;
+    color: var(--edrys-muted);
+    font-size: 22px;
     cursor: pointer;
+}
+.closeModal:hover {
+    background: var(--edrys-button);
+    color: var(--edrys-heading);
+}
+.closeModal:focus {
+    color: var(--edrys-heading);
+}
+.config_content,
+#setup_content {
+    padding: 12px 16px;
+    background: var(--edrys-bg);
+}
+.UIText,
+.UITextSmall {
+    color: var(--edrys-text);
+    font: 600 13px var(--edrys-font);
 }
 #setup_content label.UIText {
     margin-right: 0.25rem;
 }
-/* menu entries open on their text as well as their icon */
-.menu_text {
-    cursor: pointer;
+#setup_content select {
+    margin: 4px 0;
+    padding: 4px 8px;
 }
+
 /* The layout table: keep it at the module's width. Its cells would
    otherwise grow with the block area, which init.js sizes to them. */
 #globalTable {
     table-layout: fixed;
+}
+/* the toolbox categories: smaller, BlocklyDuino's colours stay */
+.blocklyToolboxDiv {
+    box-shadow: none !important;
+    border-right: 1px solid var(--edrys-line);
+}
+.blocklyTreeRow {
+    margin-bottom: 3px;
+    border-radius: 7px;
+}
+.blocklyTreeLabel {
+    font: 600 14px var(--edrys-font);
+}
+/* between the blocks and the code */
+#separator {
+    background-color: var(--edrys-line);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='30'><path d='M2 0 v30 M5 0 v30 M8 0 v30' stroke='%23a0a6ae'/></svg>");
+}
+
+/* Dialogs: board list, help, key mappings */
+.modal-content,
+.helpModal,
+#keyboard_nav {
+    border: 1px solid var(--edrys-line);
+    border-radius: 16px !important;
+    background: var(--edrys-bg);
+    color: var(--edrys-text);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+.helpModal {
+    padding: 0;
+    overflow: auto;
+    max-width: calc(100% - 3rem);
+    max-height: calc(100% - 1rem);
+}
+/* in a short module, keep its head (and close button) inside the module */
+.helpModal.show {
+    top: max(0.5rem, calc(50% - 325px));
+}
+.modal-header,
+.modal-footer,
+#helpModal_header,
+#keyboard_nav_header {
+    border-radius: 0 !important;
+    background: var(--edrys-bg);
+    color: var(--edrys-heading);
+    font: 700 16px var(--edrys-font);
+}
+.modal-header,
+#helpModal_header,
+#keyboard_nav_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--edrys-line);
+}
+#helpModal_text {
+    padding: 12px 16px;
+    font-size: 14px;
+    text-align: left;
+}
+#helpModal_text a {
+    color: var(--edrys-link);
+}
+#hideSelectScrollbar {
+    border: 1px solid var(--edrys-field-line);
+    border-radius: 8px;
+}
+#hideSelectScrollbar > select,
+#boardDescriptionSelector option {
+    border: 0;
+    background-color: var(--edrys-field);
+    color: var(--edrys-heading);
+}
+#boardDescriptionSelector optgroup {
+    color: var(--edrys-muted);
+}
+#boardListModalDialogOkay {
+    border-radius: 7px;
+    background: var(--edrys-primary);
+    color: var(--edrys-on-primary);
+    box-shadow: none;
 }
 /* The board dialog never gets wider than the module. */
 .modal {
     max-width: calc(100% - 1rem);
     left: max(0.5rem, calc(50% - 350px));
 }
+/* Closed dialogs only move up by the module's height; in a short module
+   their lower part would still cover the top bar and take its clicks. */
+.modal:not(.show),
+.helpModal:not(.show) {
+    pointer-events: none;
+}
+
+/* Ace, for the code next to the blocks */
+.ace-edrys {
+    background: var(--edrys-bg);
+    color: var(--edrys-code-text);
+}
+.ace-edrys .ace_gutter {
+    background: var(--edrys-bg);
+    color: var(--edrys-line-number);
+}
+.ace-edrys .ace_gutter-active-line,
+.ace-edrys .ace_marker-layer .ace_active-line {
+    background: var(--edrys-code-bg);
+}
+.ace-edrys .ace_cursor {
+    color: var(--edrys-code-text);
+}
+.ace-edrys .ace_marker-layer .ace_selection {
+    background: var(--edrys-selection);
+}
+.ace-edrys .ace_marker-layer .ace_bracket {
+    margin: -1px 0 0 -1px;
+    border: 1px solid var(--edrys-field-line);
+}
+.ace-edrys .ace_keyword,
+.ace-edrys .ace_storage {
+    color: var(--edrys-keyword);
+}
+.ace-edrys .ace_constant.ace_numeric,
+.ace-edrys .ace_constant.ace_language {
+    color: var(--edrys-number);
+}
+.ace-edrys .ace_string {
+    color: var(--edrys-on-warn-pill);
+}
+.ace-edrys .ace_comment {
+    color: var(--edrys-muted);
+}
+.ace-edrys .ace_fold {
+    border-color: var(--edrys-muted);
+    background-color: var(--edrys-code-bg);
+}
+
 /* Narrow modules: the blocks get the whole width (the code is still
    sent by the run button and copied by the copy button), and the
    top bar keeps to one row. */
@@ -128,7 +387,6 @@
     }
     #separator,
     #content_code,
-    #appName,
     #board_mini_picture_div {
         display: none;
     }
@@ -140,7 +398,4 @@
     #fullScreenButton {
         display: none;
     }
-}
-.helpModal {
-    max-width: calc(100% - 3rem);
 }

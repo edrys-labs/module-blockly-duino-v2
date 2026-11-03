@@ -27,8 +27,8 @@ class TweakCategories extends Blockly.ToolboxCategory {
         // We do not store the label span on the category, so use getElementsByClassName.
         var labelDom = this.rowDiv_.getElementsByClassName('blocklyTreeLabel')[0];
         if (isSelected) {
-            // Change the background color of the div to white.
-            this.rowDiv_.style.backgroundColor = 'white';
+            // A neutral background in the classroom's theme.
+            this.rowDiv_.style.backgroundColor = 'var(--edrys-code-bg)';
             // Set the colour of the text to the colour of the category.
             labelDom.style.color = this.colour_;
             this.iconDom_.style.color = this.colour_;

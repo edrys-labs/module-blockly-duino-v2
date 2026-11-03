@@ -57,7 +57,7 @@ var MSG = {
         '<ul style="clear: both;">' +
         '<li>' + 'Everyone in this room works on the same program: your changes appear for the others, and theirs for you.' + '</li>' +
         '<li>' + 'The run button (top right) sends the generated Arduino code to the station, which puts it on the board.' + '</li>' +
-        '<li>' + 'The board next to the title sets which pins the blocks offer. The teacher or the station can change it.' + '</li>' +
+        '<li>' + 'The board in the top bar sets which pins the blocks offer. The teacher or the station can change it.' + '</li>' +
         '<li>' + 'Language, block theme and font size are your own settings: menu, then Setup.' + '</li>' +
         '<li>' + 'Working with the keyboard: Ctrl+Shift+K switches keyboard navigation on.' + '</li>' +
         '</ul>' +

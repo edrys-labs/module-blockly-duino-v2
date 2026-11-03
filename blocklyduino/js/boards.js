@@ -29,7 +29,7 @@ Code.setBoard = function (boardId) {
     }
     document.getElementById('boardMenu').value = boardId;
     profile.default = profile[boardId][0];
-    document.getElementById('boardLabel').textContent = '· ' + profile.default.description;
+    document.getElementById('boardLabel').textContent = profile.default.description;
 };
 
 /**

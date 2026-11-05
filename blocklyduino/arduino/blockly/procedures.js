@@ -62,10 +62,10 @@ Blockly.Arduino['procedures_callreturn'] = function (block) {
     var args = [];
     for (var i = 0; i < block.arguments_.length; i++) {
         args[i] = Blockly.Arduino.valueToCode(block, 'ARG' + i,
-                Blockly.Arduino.ORDER_COMMA) || 'null';
+                Blockly.Arduino.ORDER_COMMA) || 'NULL';
     }
     var code = funcName + '(' + args.join(', ') + ')';
-    return [code, Blockly.Arduino.ORDER_FUNCTION_CALL];
+    return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Arduino['procedures_callnoreturn'] = function (block) {
@@ -75,7 +75,7 @@ Blockly.Arduino['procedures_callnoreturn'] = function (block) {
     var args = [];
     for (var i = 0; i < block.arguments_.length; i++) {
         args[i] = Blockly.Arduino.valueToCode(block, 'ARG' + i,
-                Blockly.Arduino.ORDER_COMMA) || 'null';
+                Blockly.Arduino.ORDER_COMMA) || 'NULL';
     }
     var code = funcName + '(' + args.join(', ') + ');\n';
     return code;

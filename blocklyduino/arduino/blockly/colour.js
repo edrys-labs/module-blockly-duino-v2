@@ -25,16 +25,16 @@ Blockly.Arduino['colour_picker'] = function (block) {
 Blockly.Arduino['colour_random'] = function (block) {
     // Generate a random colour.
     var functionName = Blockly.Arduino.provideFunction_('colourRandom',
-            ['function ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ + '() {',
+            ['String ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ + '() {',
                 '  String colorRand = "";',
                 '  for (int i = 0; i < 6; i++) {',
                 '    int randNum = random(0, 16);',
                 '    colorRand += String(randNum, HEX);',
                 '  }',
-                '  return (\'#\' + colorRand);',
+                '  return "#" + colorRand;',
                 '}']);
     var code = functionName + '()';
-    return [code, Blockly.Arduino.ORDER_FUNCTION_CALL];
+    return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Arduino['colour_rgb'] = function (block) {
@@ -52,7 +52,7 @@ Blockly.Arduino['colour_rgb'] = function (block) {
                 '  return (\'#\' + String(r, HEX) + String(g, HEX) + String(b, HEX));',
                 '}']);
     var code = functionName + '(' + red + ', ' + green + ', ' + blue + ')';
-    return [code, Blockly.Arduino.ORDER_FUNCTION_CALL];
+    return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Arduino['colour_blend'] = function (block) {
@@ -77,5 +77,5 @@ Blockly.Arduino['colour_blend'] = function (block) {
                 '  return (\'#\' + String(r) + String(g) + String(b));',
                 '}']);
     var code = functionName + '(' + c1 + ', ' + c2 + ', ' + ratio + ')';
-    return [code, Blockly.Arduino.ORDER_FUNCTION_CALL];
+    return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };

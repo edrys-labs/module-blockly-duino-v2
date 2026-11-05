@@ -98,7 +98,7 @@ Blockly.Arduino['logic_boolean'] = function (block) {
 
 Blockly.Arduino['logic_null'] = function (block) {
     // Null data type.
-    return ['null', Blockly.Arduino.ORDER_ATOMIC];
+    return ['NULL', Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino['logic_ternary'] = function (block) {
@@ -106,9 +106,9 @@ Blockly.Arduino['logic_ternary'] = function (block) {
     var value_if = Blockly.Arduino.valueToCode(block, 'IF',
             Blockly.Arduino.ORDER_CONDITIONAL) || 'false';
     var value_then = Blockly.Arduino.valueToCode(block, 'THEN',
-            Blockly.Arduino.ORDER_CONDITIONAL) || 'null';
+            Blockly.Arduino.ORDER_CONDITIONAL) || 'NULL';
     var value_else = Blockly.Arduino.valueToCode(block, 'ELSE',
-            Blockly.Arduino.ORDER_CONDITIONAL) || 'null';
+            Blockly.Arduino.ORDER_CONDITIONAL) || 'NULL';
     var code = value_if + ' ? ' + value_then + ' : ' + value_else;
     return [code, Blockly.Arduino.ORDER_CONDITIONAL];
 };
@@ -116,10 +116,10 @@ Blockly.Arduino['logic_ternary'] = function (block) {
 Blockly.Arduino['controls_switch'] = function (block) {
     // switch/var/case/do/default function
     var n = 0;
-    var switchvar = Blockly.Arduino.variableDB_.getName(this.getFieldValue('SWVAR'), Blockly.Variables.NAME_TYPE);
+    var switchvar = Blockly.Arduino.declareUntyped_(this, 'SWVAR', 'int');
     var argument = Blockly.Arduino.valueToCode(this, 'CASE' + n, Blockly.Arduino.ORDER_NONE) || 'false';
     var branch = Blockly.Arduino.statementToCode(this, 'DO' + n);
-    var code = 'switch (int ' + switchvar + ') {\n' + 'case ' + argument + ': \n' + branch + '  break;\n';
+    var code = 'switch (' + switchvar + ') {\n' + 'case ' + argument + ': \n' + branch + '  break;\n';
     for (n = 1; n <= this.casebreakCount_; n++) {
         argument = Blockly.Arduino.valueToCode(this, 'CASE' + n, Blockly.Arduino.ORDER_NONE) || 'false';
         branch = Blockly.Arduino.statementToCode(this, 'DO' + n);

@@ -37,15 +37,15 @@ Code.buildToolbox = function() {
 	// set the default toolbox if none
 	if (toolboxIds === undefined || toolboxIds === "") {
 		if (boardSelected) {
-			toolboxIds = 'LOGIC,LOOPS,MATH,TEXT,LIST,COLOUR,VARIABLES,FUNCTIONS,BOARD';
+			toolboxIds = 'LOGIC,LOOPS,MATH,TEXT,COLOUR,VARIABLES,FUNCTIONS,BOARD';
 			window.localStorage.defaultToolbox = 1;
 		}
 		else {
-			toolboxIds = 'LOGIC,LOOPS,MATH,TEXT,LIST,COLOUR,VARIABLES,FUNCTIONS';
+			toolboxIds = 'LOGIC,LOOPS,MATH,TEXT,COLOUR,VARIABLES,FUNCTIONS';
 			window.localStorage.defaultToolbox = 0;
 		}
 	} else {
-		toolboxIds += ',LOGIC,LOOPS,MATH,TEXT,LIST,COLOUR,VARIABLES,FUNCTIONS,BOARD';
+		toolboxIds += ',LOGIC,LOOPS,MATH,TEXT,COLOUR,VARIABLES,FUNCTIONS,BOARD';
 			window.localStorage.defaultToolbox = 2;
 	}
 	//save config in local browser storage for rendering in menu categories list
@@ -59,6 +59,9 @@ Code.buildToolbox = function() {
 	var k = 0;
 	toolboxIds = toolboxIds.split(",");
 	for (let i = 0; i < jsonToolbox.contents.length; i++ ) {
+		// Lists are left out: Blockly's lists are JavaScript arrays, which have no
+		// Arduino counterpart in the code generator
+		if (jsonToolbox.contents[i].toolboxitemid == 'LIST') continue;
 		if (window.localStorage.defaultToolbox != 0) {
 			for (var j = 0; j < toolboxIds.length; j++) {
 				if (jsonToolbox.contents[i].toolboxitemid == toolboxIds[j]) {

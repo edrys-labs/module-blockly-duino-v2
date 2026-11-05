@@ -246,16 +246,33 @@ Blockly.Arduino['text_getSubstring'] = function (block) {
                                 };
 
                                 Blockly.Arduino['text_trim'] = function (block) {
-                                    // Trim spaces.
-                                    var OPERATORS = {
-                                        'LEFT': ".replace(/^[\\s\\xa0]+/, '')",
-                                        'RIGHT': ".replace(/[\\s\\xa0]+$/, '')",
-                                        'BOTH': '.trim()'
+                                    // Trim spaces and line endings. Arduino's String::trim()
+                                    // changes the string and returns nothing, so the block
+                                    // calls a helper that returns the trimmed copy.
+                                    var HELPERS = {
+                                        'BOTH': ['textTrim', [
+                                                'String ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ + '(String text) {',
+                                                '  text.trim();',
+                                                '  return text;',
+                                                '}']],
+                                        'LEFT': ['textTrimLeft', [
+                                                'String ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ + '(String text) {',
+                                                '  unsigned int start = 0;',
+                                                '  while (start < text.length() && isspace(text[start])) start++;',
+                                                '  return text.substring(start);',
+                                                '}']],
+                                        'RIGHT': ['textTrimRight', [
+                                                'String ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ + '(String text) {',
+                                                '  unsigned int end = text.length();',
+                                                '  while (end > 0 && isspace(text[end - 1])) end--;',
+                                                '  return text.substring(0, end);',
+                                                '}']]
                                     };
-                                    var operator = OPERATORS[block.getFieldValue('MODE')];
+                                    var helper = HELPERS[block.getFieldValue('MODE')] || HELPERS['BOTH'];
+                                    var functionName = Blockly.Arduino.provideFunction_(helper[0], helper[1]);
                                     var text = Blockly.Arduino.valueToCode(block, 'TEXT',
-                                            Blockly.Arduino.ORDER_MEMBER) || '\'\'';
-                                    return [text + operator, Blockly.Arduino.ORDER_FUNCTION_CALL];
+                                            Blockly.Arduino.ORDER_NONE) || '""';
+                                    return [functionName + '(' + text + ')', Blockly.Arduino.ORDER_UNARY_POSTFIX];
                                 };
 
                                 Blockly.Arduino['text_print'] = function (block) {
